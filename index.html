@@ -2554,6 +2554,29 @@ footer p{
     );
     pointer-events: none;
 }
+   /* CORRECCIÓN DEFINITIVA DE LAS HORAS DEL ITINERARIO */
+
+.timeline .timeline-dot::before,
+.timeline .timeline-dot::after {
+    content: none !important;
+    display: none !important;
+}
+
+.timeline .timeline-dot {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    
+    text-align: center !important;
+    line-height: 1 !important;
+    
+    font-family: Arial, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px !important;
+    
+    color: #ffffff !important;
+}
 </style>
 
 </head>
@@ -3347,15 +3370,6 @@ footer p{
 
         </div>
 
-
-        <div class="gallery-grid">
-
-
-            <div class="gallery-photo reveal">
-
-    <div class="gallery-label">
-        Nuestra historia
-    </div>
 
 </div>
 
