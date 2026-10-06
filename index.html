@@ -2628,6 +2628,40 @@ footer p{
         margin-top: 0;
     }
 }
+   /* BOTÓN DE MÚSICA */
+.boton-musica {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.7);
+    background: #8f2348;
+    color: #ffffff;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 8px 25px rgba(0,0,0,.18);
+    transition: all .3s ease;
+}
+
+.boton-musica:hover {
+    transform: scale(1.08);
+}
+
+.boton-musica.musica-activa {
+    animation: girarMusica 2s linear infinite;
+}
+
+@keyframes girarMusica {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
 </style>
 
 </head>
@@ -4429,6 +4463,30 @@ document
     );
 
 </script>
+<!-- MÚSICA DE LA BODA -->
+<audio id="musicaBoda" loop>
+    <source src="musica-boda.mp3" type="audio/mpeg">
+</audio>
 
+<button id="botonMusica" class="boton-musica" aria-label="Activar música">
+    ♫
+</button>
+
+<script>
+const musica = document.getElementById("musicaBoda");
+const botonMusica = document.getElementById("botonMusica");
+
+botonMusica.addEventListener("click", function () {
+    if (musica.paused) {
+        musica.play();
+        botonMusica.innerHTML = "Ⅱ";
+        botonMusica.classList.add("musica-activa");
+    } else {
+        musica.pause();
+        botonMusica.innerHTML = "♫";
+        botonMusica.classList.remove("musica-activa");
+    }
+});
+</script>
 </body>
 </html>
