@@ -2404,6 +2404,58 @@ footer p{
   .timeline .timeline-content p {
     font-size: 13px;
   }
+/* =====================================================
+   HORAS CENTRADAS DENTRO DE LOS CIRCULOS
+   ===================================================== */
+
+/* Ocultar las horas que actualmente aparecen junto al texto */
+.timeline .timeline-time {
+  display: none !important;
+}
+
+/* El círculo deja de mostrar la estrella */
+.timeline .timeline-dot {
+  font-size: 0 !important;
+}
+
+/* 15:30 */
+.timeline .timeline-item:nth-child(1) .timeline-dot::after {
+  content: "15:30";
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+}
+
+/* 17:00 */
+.timeline .timeline-item:nth-child(2) .timeline-dot::after {
+  content: "17:00";
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+}
+
+/* 19:00 */
+.timeline .timeline-item:nth-child(3) .timeline-dot::after {
+  content: "19:00";
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+}
+
+/* 20:00 */
+.timeline .timeline-item:nth-child(4) .timeline-dot::after {
+  content: "20:00";
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #ffffff;
 }
 </style>
 
