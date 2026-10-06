@@ -2481,6 +2481,79 @@ footer p{
   
   box-sizing: border-box !important;
 }
+   /* =====================================================
+   FOTOGRAFÍAS - ISAÍ & EBONY
+   ===================================================== */
+
+.photo-main {
+    overflow: hidden;
+    position: relative;
+}
+
+.photo-main img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 1.2s ease;
+}
+
+.photo-main:hover img {
+    transform: scale(1.03);
+}
+
+
+/* GALERÍA */
+
+.gallery-photo {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.gallery-photo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    transition:
+        transform 1s ease,
+        filter 1s ease;
+}
+
+.gallery-photo:hover img {
+    transform: scale(1.05);
+    filter: brightness(0.88);
+}
+
+
+/* Etiqueta sobre la fotografía */
+
+.gallery-label {
+    position: absolute;
+    left: 24px;
+    bottom: 22px;
+    z-index: 2;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0,0,0,.25);
+}
+
+
+/* Animación suave */
+
+.gallery-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(60, 10, 30, .55),
+        rgba(60, 10, 30, 0) 55%
+    );
+    pointer-events: none;
+}
 </style>
 
 </head>
@@ -3092,11 +3165,8 @@ footer p{
 
 
         <div class="photo-main reveal">
-
-            AQUÍ IRÁ
-            NUESTRA FOTO
-
-        </div>
+    <img src="img/historia.jpg" alt="Isaí y Ebony">
+</div>
 
 
         <div class="story-text reveal">
@@ -3283,29 +3353,33 @@ footer p{
 
             <div class="gallery-photo reveal">
 
-                <div class="gallery-label">
-                    Nuestra historia
-                </div>
+    <div class="gallery-label">
+        Nuestra historia
+    </div>
 
-            </div>
-
-
-            <div class="gallery-photo reveal">
-
-                <div class="gallery-label">
-                    Momentos especiales
-                </div>
-
-            </div>
+</div>
 
 
-            <div class="gallery-photo reveal">
+           <div class="gallery-photo reveal">
+    <img src="img/momento-01.jpg" alt="Nuestra historia">
+    <div class="gallery-label">
+        Nuestra historia
+    </div>
+</div>
 
-                <div class="gallery-label">
-                    Juntos
-                </div>
+<div class="gallery-photo reveal">
+    <img src="img/momento-02.jpg" alt="Momentos especiales">
+    <div class="gallery-label">
+        Momentos especiales
+    </div>
+</div>
 
-            </div>
+<div class="gallery-photo reveal">
+    <img src="img/momento-03.jpg" alt="Juntos">
+    <div class="gallery-label">
+        Juntos
+    </div>
+</div>
 
 
         </div>
