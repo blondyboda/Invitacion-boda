@@ -2362,48 +2362,124 @@ footer p{
 
 @media (max-width: 700px) {
 
-  .timeline {
-    margin-top: 45px;
-    padding: 10px 0;
-  }
+    .timeline {
+        position: relative !important;
+        width: 100% !important;
+        display: block !important;
+        padding: 20px 0 40px !important;
+        margin: 0 !important;
+    }
 
-  .timeline::before {
-    left: 35px;
-    transform: none;
-  }
+    .timeline::before {
+        content: "" !important;
+        position: absolute !important;
+        left: 50% !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        width: 1px !important;
+        transform: translateX(-50%) !important;
+        display: block !important;
+    }
 
-  .timeline .timeline-item {
-    display: grid !important;
-    grid-template-columns: 70px 1fr;
-    min-height: 145px;
-  }
+    .timeline-item {
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 180px !important;
 
-  .timeline .timeline-dot {
-    grid-column: 1;
-    grid-row: 1;
-    width: 60px;
-    height: 60px;
-  }
+        margin: 0 !important;
+        padding: 0 !important;
 
-  .timeline .timeline-content,
-  .timeline .timeline-item:nth-child(odd) .timeline-content,
-  .timeline .timeline-item:nth-child(even) .timeline-content {
-    grid-column: 2;
-    grid-row: 1;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
 
-    margin: 0 !important;
-    padding: 12px 15px;
+        left: 0 !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
 
-    text-align: left;
-  }
+        transform: none !important;
+    }
 
-  .timeline .timeline-content h3 {
-    font-size: 21px;
-  }
+    .timeline-item .timeline-dot {
+        position: relative !important;
 
-  .timeline .timeline-content p {
-    font-size: 13px;
-  }
+        order: 1 !important;
+
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+
+        transform: none !important;
+
+        width: 78px !important;
+        height: 78px !important;
+
+        margin: 0 auto !important;
+
+        flex: 0 0 78px !important;
+
+        z-index: 10 !important;
+    }
+
+    .timeline-item .timeline-dot span {
+        display: block !important;
+        position: static !important;
+        transform: none !important;
+    }
+
+    .timeline-item .timeline-content {
+        position: relative !important;
+
+        order: 2 !important;
+
+        width: calc(100% - 40px) !important;
+        max-width: 330px !important;
+
+        margin: 15px auto 0 !important;
+        padding: 0 !important;
+
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+
+        transform: none !important;
+
+        text-align: center !important;
+
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+
+        z-index: 5 !important;
+    }
+
+    .timeline-item .timeline-content h3 {
+        display: block !important;
+        width: 100% !important;
+
+        margin: 0 0 6px !important;
+
+        text-align: center !important;
+    }
+
+    .timeline-item .timeline-content p {
+        display: block !important;
+        width: 100% !important;
+
+        margin: 0 auto !important;
+
+        text-align: center !important;
+    }
+
+    .timeline-item:last-child {
+        min-height: 150px !important;
+    }
+}
 /* =====================================================
    HORAS CENTRADAS DENTRO DE LOS CIRCULOS
    ===================================================== */
@@ -4656,8 +4732,9 @@ document
 
 </script>
 <!-- MÚSICA DE LA BODA -->
-<audio id="musicaBoda" loop preload="auto">
-    <source src="musica-boda.mp3" type="audio/mpeg">
+<audio id="musicaBoda" preload="auto" loop>
+    <source src="./musica-boda.mp3" type="audio/mpeg">
+    Tu navegador no puede reproducir este audio.
 </audio>
 
 <button id="botonMusica" class="boton-musica" aria-label="Activar música">
@@ -4668,15 +4745,31 @@ document
 const musica = document.getElementById("musicaBoda");
 const botonMusica = document.getElementById("botonMusica");
 
-botonMusica.addEventListener("click", function () {
+botonMusica.addEventListener("click", async function () {
+
     if (musica.paused) {
-        musica.play().catch(function(error) {
-    console.log("No se pudo reproducir la música:", error);
-});
-        botonMusica.innerHTML = "Ⅱ";
-        botonMusica.classList.add("musica-activa");
+
+        try {
+            await musica.play();
+
+            // SOLO cambia a pausa si realmente comenzó
+            botonMusica.innerHTML = "Ⅱ";
+            botonMusica.classList.add("musica-activa");
+
+        } catch (error) {
+
+            console.error("ERROR AL REPRODUCIR:", error);
+
+            botonMusica.innerHTML = "♫";
+            botonMusica.classList.remove("musica-activa");
+
+            alert("No se pudo reproducir la música. Verifica que el archivo musica-boda.mp3 esté correctamente cargado.");
+        }
+
     } else {
+
         musica.pause();
+
         botonMusica.innerHTML = "♫";
         botonMusica.classList.remove("musica-activa");
     }
