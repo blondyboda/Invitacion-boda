@@ -2662,19 +2662,19 @@ footer p{
         transform: rotate(360deg);
     }
 }
-</style>
+/* tu CSS anterior */
+
+
 /* =====================================================
    CORRECCIÓN FINAL - LÍNEA DE TIEMPO
    ===================================================== */
 
-/* Elimina cualquier hora generada automáticamente */
 .timeline .timeline-dot::before,
 .timeline .timeline-dot::after {
     content: none !important;
     display: none !important;
 }
 
-/* La burbuja no mostrará texto directo */
 .timeline .timeline-dot {
     font-size: 0 !important;
     display: flex !important;
@@ -2683,7 +2683,6 @@ footer p{
     text-align: center !important;
 }
 
-/* La única hora visible será la del span */
 .timeline .timeline-dot span {
     display: block !important;
     font-family: Arial, sans-serif !important;
@@ -2694,7 +2693,82 @@ footer p{
     color: #ffffff !important;
 }
 
+@media (max-width: 700px) {
 
+    .timeline {
+        position: relative !important;
+        width: 100% !important;
+        padding: 10px 0 30px !important;
+    }
+
+    .timeline::before {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+
+    .timeline-item {
+        position: relative !important;
+        width: 100% !important;
+        min-height: 0 !important;
+        margin: 0 0 65px 0 !important;
+        padding: 0 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        transform: none !important;
+    }
+
+    .timeline-item:last-child {
+        margin-bottom: 20px !important;
+    }
+
+    .timeline-item .timeline-dot {
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        order: 1 !important;
+        width: 78px !important;
+        height: 78px !important;
+        margin: 0 auto !important;
+        z-index: 5 !important;
+    }
+
+    .timeline-item .timeline-content {
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        order: 2 !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        margin: 16px auto 0 !important;
+        padding: 0 !important;
+        text-align: center !important;
+    }
+
+    .timeline-item .timeline-content h3 {
+        text-align: center !important;
+        margin: 0 0 7px !important;
+    }
+
+    .timeline-item .timeline-content p {
+        text-align: center !important;
+        margin: 0 auto !important;
+        max-width: 300px !important;
+    }
+}
+
+
+/* AQUÍ TERMINA EL CSS */
 /* =====================================================
    VERSIÓN MÓVIL
    ===================================================== */
@@ -2785,8 +2859,12 @@ footer p{
         max-width: 300px !important;
     }
 }
-</head>
-
+.timeline .timeline-dot::before,
+.timeline .timeline-dot::after {
+    content: none !important;
+    display: none !important;
+}
+</style>
 
 <body>
 
