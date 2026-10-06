@@ -7,32 +7,37 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color" content="#5b1f2a">
+<meta name="theme-color" content="#8b2d49">
 
 <title>Isaí & Ebony | Nuestra Boda</title>
 
 <style>
 
 /* =========================================================
-   PALETA
+   PALETA PRINCIPAL
 ========================================================= */
 
 :root{
-    --borgona:#5b1f2a;
-    --borgona-oscuro:#351019;
-    --borgona-claro:#7a3440;
 
-    --crema:#f7efe2;
-    --crema-claro:#fdfaf4;
-    --crema-oscuro:#eadcc8;
+    --borgona:#8b2d49;
+    --borgona-dark:#54152b;
+    --borgona-soft:#a64d68;
 
-    --dorado:#b28b4d;
-    --dorado-claro:#d7bd86;
+    --crema:#fbf8f3;
+    --crema-2:#f5eee5;
+    --crema-3:#eadfd4;
 
-    --texto:#302522;
+    --rosa:#c88b9d;
+    --rosa-claro:#dfb8c3;
+
+    --dorado:#c5a15a;
+    --dorado-claro:#dfc58b;
+
+    --texto:#3b2b2d;
     --blanco:#ffffff;
 
-    --sombra:0 18px 50px rgba(50,25,25,.14);
+    --sombra:
+        0 20px 60px rgba(65,25,38,.13);
 }
 
 
@@ -51,17 +56,22 @@ html{
 }
 
 body{
+
     background:var(--crema);
+
     color:var(--texto);
 
-    font-family:Georgia,"Times New Roman",serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     overflow-x:hidden;
 }
 
 a{
-    color:inherit;
     text-decoration:none;
+    color:inherit;
 }
 
 button{
@@ -74,52 +84,61 @@ button{
 ========================================================= */
 
 .loader{
-    position:fixed;
-    inset:0;
 
-    background:var(--crema);
+    position:fixed;
+
+    inset:0;
 
     z-index:99999;
 
+    background:var(--crema);
+
     display:flex;
-    flex-direction:column;
-    justify-content:center;
+
     align-items:center;
 
+    justify-content:center;
+
+    flex-direction:column;
+
     transition:
-        opacity .8s ease,
-        visibility .8s ease;
+        opacity 1s ease,
+        visibility 1s ease;
 }
 
-.loader.oculto{
+.loader.hide{
+
     opacity:0;
+
     visibility:hidden;
 }
 
-.loader-corazon{
+.loader-flor{
+
+    font-size:45px;
+
     color:var(--dorado);
 
-    font-size:42px;
-
     animation:
-        latido 1.2s infinite;
+        heartbeat 1.5s infinite;
 }
 
-.loader-texto{
-    margin-top:18px;
+.loader-text{
+
+    margin-top:20px;
 
     font-family:Arial,sans-serif;
 
-    font-size:10px;
+    font-size:9px;
 
     letter-spacing:4px;
 
-    text-transform:uppercase;
-
     color:var(--borgona);
+
+    text-transform:uppercase;
 }
 
-@keyframes latido{
+@keyframes heartbeat{
 
     0%,100%{
         transform:scale(1);
@@ -128,73 +147,178 @@ button{
     50%{
         transform:scale(1.18);
     }
-
 }
 
 
 /* =========================================================
-   BOTÓN DE MÚSICA
+   PETALOS FLOTANTES
 ========================================================= */
 
-.boton-musica{
+.petals{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:10;
+
+    overflow:hidden;
+}
+
+.petal{
+
+    position:absolute;
+
+    top:-30px;
+
+    width:10px;
+
+    height:15px;
+
+    background:var(--rosa);
+
+    border-radius:
+        70% 30% 70% 30%;
+
+    opacity:.45;
+
+    animation:
+        caer linear infinite;
+}
+
+.petal:nth-child(1){
+    left:8%;
+    animation-duration:14s;
+    animation-delay:1s;
+}
+
+.petal:nth-child(2){
+    left:25%;
+    animation-duration:18s;
+    animation-delay:5s;
+}
+
+.petal:nth-child(3){
+    left:42%;
+    animation-duration:13s;
+    animation-delay:3s;
+}
+
+.petal:nth-child(4){
+    left:61%;
+    animation-duration:17s;
+    animation-delay:7s;
+}
+
+.petal:nth-child(5){
+    left:78%;
+    animation-duration:15s;
+    animation-delay:2s;
+}
+
+.petal:nth-child(6){
+    left:91%;
+    animation-duration:19s;
+    animation-delay:9s;
+}
+
+@keyframes caer{
+
+    0%{
+        transform:
+            translateY(-30px)
+            rotate(0deg);
+    }
+
+    50%{
+        transform:
+            translateY(50vh)
+            translateX(60px)
+            rotate(180deg);
+    }
+
+    100%{
+        transform:
+            translateY(110vh)
+            translateX(-70px)
+            rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   MUSICA
+========================================================= */
+
+.music{
 
     position:fixed;
 
     right:18px;
+
     bottom:18px;
 
     width:50px;
+
     height:50px;
 
     border-radius:50%;
 
-    border:1px solid rgba(255,255,255,.4);
+    border:
+        1px solid
+        rgba(255,255,255,.5);
 
     background:var(--borgona);
 
-    color:var(--crema);
+    color:white;
 
     z-index:9000;
 
     cursor:pointer;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
-    font-size:17px;
-
     box-shadow:
-        0 8px 25px rgba(0,0,0,.2);
+        0 8px 30px rgba(0,0,0,.2);
 
     transition:.3s;
 }
 
-.boton-musica:hover{
+.music:hover{
     transform:scale(1.08);
 }
 
-.boton-musica.activo{
-    animation:pulso 2s infinite;
+.music.playing{
+
+    animation:
+        musicPulse 2s infinite;
 }
 
-@keyframes pulso{
+@keyframes musicPulse{
 
     0%{
         box-shadow:
-        0 0 0 0 rgba(178,139,77,.5);
+            0 0 0 0
+            rgba(197,161,90,.5);
     }
 
     70%{
         box-shadow:
-        0 0 0 12px rgba(178,139,77,0);
+            0 0 0 12px
+            rgba(197,161,90,0);
     }
 
     100%{
         box-shadow:
-        0 0 0 0 rgba(178,139,77,0);
+            0 0 0 0
+            rgba(197,161,90,0);
     }
-
 }
 
 
@@ -202,7 +326,7 @@ button{
    PORTADA
 ========================================================= */
 
-.portada{
+.hero{
 
     min-height:100svh;
 
@@ -218,100 +342,166 @@ button{
 
     text-align:center;
 
-    color:var(--crema);
+    color:white;
 
     background:
 
-    radial-gradient(
-        circle at 20% 20%,
-        rgba(215,189,134,.17),
-        transparent 27%
-    ),
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(197,161,90,.13),
+            transparent 25%
+        ),
 
-    radial-gradient(
-        circle at 85% 80%,
-        rgba(178,139,77,.12),
-        transparent 28%
-    ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(200,139,157,.12),
+            transparent 25%
+        ),
 
-    var(--borgona-oscuro);
+        var(--borgona);
 }
 
-.portada::before{
+
+/* marco */
+
+.hero::before{
 
     content:"";
 
     position:absolute;
 
-    inset:22px;
+    inset:20px;
 
-    border:1px solid
-        rgba(215,189,134,.48);
+    border:
+        1px solid
+        rgba(223,197,139,.65);
 
     pointer-events:none;
 }
 
-.portada::after{
+
+/* líneas geométricas */
+
+.hero::after{
 
     content:"";
 
     position:absolute;
 
     width:500px;
+
     height:500px;
 
-    border:1px solid
-        rgba(215,189,134,.15);
+    border:
+        1px solid
+        rgba(223,197,139,.2);
 
-    border-radius:50%;
+    transform:
+        rotate(45deg);
 
-    top:-260px;
-    right:-160px;
+    right:-300px;
+
+    top:-230px;
 }
 
-.orbita{
+
+/* flor superior */
+
+.flower-top{
 
     position:absolute;
 
-    width:380px;
-    height:380px;
+    top:-45px;
 
-    border:1px solid
-        rgba(215,189,134,.12);
+    right:-20px;
 
-    border-radius:50%;
+    width:330px;
 
-    bottom:-230px;
-    left:-180px;
+    opacity:.8;
+
+    transform:
+        rotate(8deg);
+
+    animation:
+        flowerFloat 6s ease-in-out infinite;
 }
 
-.portada-contenido{
+.flower-bottom{
 
-    width:min(950px,90%);
+    position:absolute;
+
+    bottom:-55px;
+
+    left:-35px;
+
+    width:350px;
+
+    opacity:.7;
+
+    transform:
+        rotate(190deg);
+
+    animation:
+        flowerFloat2 7s ease-in-out infinite;
+}
+
+@keyframes flowerFloat{
+
+    0%,100%{
+        transform:
+            rotate(8deg)
+            translateY(0);
+    }
+
+    50%{
+        transform:
+            rotate(5deg)
+            translateY(10px);
+    }
+}
+
+@keyframes flowerFloat2{
+
+    0%,100%{
+        transform:
+            rotate(190deg)
+            translateY(0);
+    }
+
+    50%{
+        transform:
+            rotate(187deg)
+            translateY(-10px);
+    }
+}
+
+
+.hero-content{
 
     position:relative;
 
     z-index:2;
 
+    width:min(900px,90%);
+
     animation:
-        entradaPortada 1.5s ease both;
+        heroIn 1.8s ease both;
 }
 
-@keyframes entradaPortada{
+@keyframes heroIn{
 
     from{
         opacity:0;
-        transform:translateY(35px);
+        transform:translateY(40px);
     }
 
     to{
         opacity:1;
         transform:translateY(0);
     }
-
 }
 
-.portada-superior{
+.hero-small{
 
     font-family:Arial,sans-serif;
 
@@ -323,90 +513,93 @@ button{
 
     color:var(--dorado-claro);
 
-    margin-bottom:25px;
+    margin-bottom:28px;
 }
 
-.ornamento{
+.hero-symbol{
 
     color:var(--dorado-claro);
 
-    font-size:23px;
+    font-size:22px;
 
-    letter-spacing:10px;
+    letter-spacing:12px;
 
-    margin:15px 0;
+    margin-bottom:20px;
 }
 
-.portada h1{
+.hero h1{
 
     font-size:
-        clamp(42px,7vw,86px);
+        clamp(
+            39px,
+            7vw,
+            86px
+        );
 
     font-weight:normal;
 
-    line-height:.95;
+    line-height:.98;
 
-    margin:18px 0;
+    margin-bottom:15px;
 }
 
-.portada h1 .ampersand{
+.hero h1 span{
 
     display:block;
 
     font-size:
-        clamp(27px,4vw,43px);
+        clamp(
+            27px,
+            4vw,
+            43px
+        );
 
     color:var(--dorado-claro);
 
     margin:13px 0;
 }
 
-.portada-fecha{
+.hero-date{
 
     font-family:Arial,sans-serif;
 
+    letter-spacing:5px;
+
     font-size:11px;
 
-    letter-spacing:4px;
-
-    color:var(--crema-oscuro);
-
-    margin-top:30px;
-
     text-transform:uppercase;
+
+    margin-top:28px;
 }
 
-.portada-frase{
+.hero-text{
 
     max-width:650px;
 
-    margin:30px auto 35px;
+    margin:30px auto;
 
     font-size:18px;
 
-    line-height:1.8;
+    line-height:1.9;
 
     font-style:italic;
 
-    color:#f2e7d8;
+    color:#f6eee5;
 }
 
-.boton-principal{
+.open-button{
 
     display:inline-flex;
-
-    justify-content:center;
-    align-items:center;
-
-    min-width:220px;
 
     padding:16px 30px;
 
     background:var(--dorado);
 
-    color:white;
+    border:
+        1px solid
+        var(--dorado);
 
-    border:1px solid var(--dorado);
+    color:white;
 
     font-family:Arial,sans-serif;
 
@@ -419,7 +612,7 @@ button{
     transition:.35s;
 }
 
-.boton-principal:hover{
+.open-button:hover{
 
     background:transparent;
 
@@ -430,10 +623,10 @@ button{
 
 
 /* =========================================================
-   NAVEGACIÓN
+   NAVEGACION
 ========================================================= */
 
-.navbar{
+.nav{
 
     position:sticky;
 
@@ -442,20 +635,20 @@ button{
     z-index:8000;
 
     background:
-        rgba(253,250,244,.96);
+        rgba(251,248,243,.96);
 
     backdrop-filter:blur(12px);
 
     border-bottom:
         1px solid
-        rgba(178,139,77,.22);
+        rgba(197,161,90,.25);
 }
 
-.navbar-contenido{
-
-    max-width:1150px;
+.nav-inner{
 
     min-height:64px;
+
+    max-width:1100px;
 
     margin:auto;
 
@@ -474,11 +667,11 @@ button{
     scrollbar-width:none;
 }
 
-.navbar-contenido::-webkit-scrollbar{
+.nav-inner::-webkit-scrollbar{
     display:none;
 }
 
-.navbar a{
+.nav a{
 
     white-space:nowrap;
 
@@ -495,7 +688,7 @@ button{
     transition:.3s;
 }
 
-.navbar a:hover{
+.nav a:hover{
     color:var(--dorado);
 }
 
@@ -504,21 +697,21 @@ button{
    SECCIONES
 ========================================================= */
 
-.seccion{
-
-    padding:100px 20px;
+.section{
 
     position:relative;
+
+    padding:100px 20px;
 }
 
-.contenedor{
+.container{
 
-    max-width:1100px;
+    max-width:1050px;
 
     margin:auto;
 }
 
-.titulo-seccion{
+.section-title{
 
     text-align:center;
 
@@ -537,20 +730,24 @@ button{
 
     color:var(--dorado);
 
-    margin-bottom:16px;
+    margin-bottom:15px;
 }
 
-.titulo-seccion h2{
+.section-title h2{
 
-    font-size:
-        clamp(34px,5vw,56px);
+    color:var(--borgona);
 
     font-weight:normal;
 
-    color:var(--borgona);
+    font-size:
+        clamp(
+            35px,
+            5vw,
+            58px
+        );
 }
 
-.linea-dorada{
+.gold-line{
 
     width:70px;
 
@@ -561,7 +758,7 @@ button{
     margin:22px auto;
 }
 
-.texto-centro{
+.center-text{
 
     max-width:760px;
 
@@ -579,46 +776,69 @@ button{
    BIENVENIDA
 ========================================================= */
 
-.bienvenida{
+.welcome{
 
-    background:
-        var(--crema-claro);
+    background:var(--crema);
 }
 
-.inicial{
+.welcome-card{
+
+    max-width:800px;
+
+    margin:auto;
+
+    text-align:center;
+}
+
+.welcome-symbol{
 
     width:90px;
+
     height:90px;
-
-    margin:0 auto 30px;
-
-    border:1px solid var(--dorado);
 
     border-radius:50%;
 
+    border:
+        1px solid
+        var(--dorado);
+
     display:flex;
 
-    justify-content:center;
     align-items:center;
+
+    justify-content:center;
+
+    margin:
+        0 auto 35px;
 
     color:var(--borgona);
 
     font-size:35px;
+
+    animation:
+        slowPulse 4s infinite;
 }
 
-.cita{
+@keyframes slowPulse{
 
-    max-width:720px;
+    0%,100%{
+        transform:scale(1);
+    }
 
-    margin:35px auto 0;
+    50%{
+        transform:scale(1.05);
+    }
+}
 
-    text-align:center;
+.quote{
 
-    font-size:21px;
-
-    line-height:1.8;
+    margin-top:40px;
 
     color:var(--borgona);
+
+    font-size:22px;
+
+    line-height:1.8;
 
     font-style:italic;
 }
@@ -632,7 +852,7 @@ button{
 
     background:var(--borgona);
 
-    color:var(--crema);
+    color:white;
 
     text-align:center;
 }
@@ -642,10 +862,10 @@ button{
 }
 
 .countdown h2{
-    color:var(--crema);
+    color:white;
 }
 
-.contador{
+.countdown-grid{
 
     max-width:850px;
 
@@ -658,37 +878,41 @@ button{
 
     border-top:
         1px solid
-        rgba(215,189,134,.35);
+        rgba(223,197,139,.4);
 
     border-bottom:
         1px solid
-        rgba(215,189,134,.35);
+        rgba(223,197,139,.4);
 }
 
-.contador-item{
+.count-item{
 
     padding:35px 10px;
 
     border-right:
         1px solid
-        rgba(215,189,134,.23);
+        rgba(223,197,139,.25);
 }
 
-.contador-item:last-child{
+.count-item:last-child{
     border-right:none;
 }
 
-.contador-numero{
+.count-number{
 
     display:block;
 
     font-size:
-        clamp(38px,6vw,65px);
+        clamp(
+            40px,
+            6vw,
+            65px
+        );
 
     color:var(--dorado-claro);
 }
 
-.contador-label{
+.count-label{
 
     display:block;
 
@@ -702,94 +926,7 @@ button{
 
     text-transform:uppercase;
 
-    color:#eadfcf;
-}
-
-
-/* =========================================================
-   EVENTOS
-========================================================= */
-
-.eventos{
-    background:var(--crema);
-}
-
-.eventos-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:20px;
-}
-
-.evento{
-
-    background:var(--crema-claro);
-
-    border:
-        1px solid
-        rgba(178,139,77,.25);
-
-    padding:40px 25px;
-
-    text-align:center;
-
-    box-shadow:
-        0 5px 25px
-        rgba(50,25,25,.04);
-
-    transition:.4s;
-}
-
-.evento:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:var(--sombra);
-}
-
-.evento-icono{
-
-    font-size:34px;
-
-    color:var(--dorado);
-
-    margin-bottom:20px;
-}
-
-.evento h3{
-
-    color:var(--borgona);
-
-    font-size:25px;
-
-    font-weight:normal;
-
-    margin-bottom:17px;
-}
-
-.evento .hora{
-
-    color:var(--dorado);
-
-    font-family:Arial,sans-serif;
-
-    font-size:10px;
-
-    letter-spacing:3px;
-
-    text-transform:uppercase;
-
-    margin-bottom:18px;
-}
-
-.evento p{
-
-    font-size:15px;
-
-    line-height:1.8;
+    color:#eadfd4;
 }
 
 
@@ -797,14 +934,14 @@ button{
    ITINERARIO
 ========================================================= */
 
-.itinerario{
+.schedule{
 
-    background:var(--crema-claro);
+    background:var(--crema-2);
 }
 
 .timeline{
 
-    max-width:800px;
+    max-width:850px;
 
     margin:auto;
 
@@ -817,17 +954,37 @@ button{
 
     position:absolute;
 
-    left:50%;
-
     top:0;
+
     bottom:0;
+
+    left:50%;
 
     width:1px;
 
-    background:
-        var(--dorado);
+    background:var(--dorado);
 
     transform:translateX(-50%);
+
+    transform-origin:top;
+
+    animation:
+        lineGrow 2s ease both;
+}
+
+@keyframes lineGrow{
+
+    from{
+        transform:
+            translateX(-50%)
+            scaleY(0);
+    }
+
+    to{
+        transform:
+            translateX(-50%)
+            scaleY(1);
+    }
 }
 
 .timeline-item{
@@ -835,97 +992,99 @@ button{
     display:grid;
 
     grid-template-columns:
-        1fr 70px 1fr;
+        1fr 80px 1fr;
 
     align-items:center;
 
-    margin-bottom:40px;
+    margin-bottom:45px;
 }
 
-.timeline-item:last-child{
-    margin-bottom:0;
-}
-
-.timeline-text{
-
-    padding:15px 30px;
-}
-
-.timeline-item:nth-child(
-    odd
-) .timeline-text:first-child{
-    text-align:right;
-}
-
-.timeline-item:nth-child(
-    even
-) .timeline-text:first-child{
-    visibility:hidden;
-}
-
-.timeline-item:nth-child(
-    odd
-) .timeline-text:last-child{
-    visibility:hidden;
-}
-
-.timeline-item:nth-child(
-    even
-) .timeline-text:last-child{
-    text-align:left;
-}
-
-.timeline-hora{
+.timeline-time{
 
     width:70px;
+
     height:70px;
 
     border-radius:50%;
 
     background:var(--borgona);
 
-    color:var(--crema);
-
-    border:
-        5px solid
-        var(--crema-claro);
+    color:white;
 
     outline:
         1px solid
         var(--dorado);
 
+    border:
+        5px solid
+        var(--crema-2);
+
     display:flex;
 
     justify-content:center;
+
     align-items:center;
 
     text-align:center;
 
     font-family:Arial,sans-serif;
 
-    font-size:9px;
+    font-size:10px;
 
     letter-spacing:1px;
+
+    z-index:2;
 }
 
-.timeline-text h3{
+.timeline-content{
+
+    padding:20px 30px;
+}
+
+.timeline-content h3{
 
     color:var(--borgona);
 
-    font-size:22px;
+    font-size:23px;
 
     font-weight:normal;
 
     margin-bottom:8px;
 }
 
-.timeline-text p{
+.timeline-content p{
 
     font-family:Arial,sans-serif;
 
     font-size:12px;
 
-    color:#665652;
+    line-height:1.7;
+
+    color:#69585a;
+}
+
+.timeline-item:nth-child(odd)
+.timeline-content:first-child{
+
+    text-align:right;
+}
+
+.timeline-item:nth-child(odd)
+.timeline-content:last-child{
+
+    visibility:hidden;
+}
+
+.timeline-item:nth-child(even)
+.timeline-content:first-child{
+
+    visibility:hidden;
+}
+
+.timeline-item:nth-child(even)
+.timeline-content:last-child{
+
+    text-align:left;
 }
 
 
@@ -933,14 +1092,12 @@ button{
    PADRES
 ========================================================= */
 
-.padres{
+.parents{
 
     background:var(--crema);
-
-    text-align:center;
 }
 
-.padres-grid{
+.parents-grid{
 
     max-width:900px;
 
@@ -954,33 +1111,48 @@ button{
     gap:25px;
 }
 
-.padres-card{
+.parent-card{
 
-    padding:40px 25px;
+    padding:45px 25px;
+
+    background:var(--crema-claro);
 
     border:
         1px solid
-        rgba(178,139,77,.3);
+        rgba(197,161,90,.3);
 
-    background:var(--crema-claro);
+    text-align:center;
+
+    box-shadow:
+        0 5px 25px
+        rgba(70,25,40,.04);
+
+    transition:.4s;
 }
 
-.padres-card h3{
+.parent-card:hover{
+
+    transform:translateY(-7px);
+
+    box-shadow:var(--sombra);
+}
+
+.parent-card h3{
 
     color:var(--dorado);
 
-    font-size:11px;
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
 
     letter-spacing:3px;
-
-    font-family:Arial,sans-serif;
 
     text-transform:uppercase;
 
     margin-bottom:25px;
 }
 
-.padres-card p{
+.parent-card p{
 
     color:var(--borgona);
 
@@ -994,12 +1166,12 @@ button{
    HISTORIA
 ========================================================= */
 
-.historia{
+.story{
 
     background:var(--crema-claro);
 }
 
-.historia-grid{
+.story-grid{
 
     display:grid;
 
@@ -1011,31 +1183,37 @@ button{
     align-items:center;
 }
 
-.foto-principal{
+.photo-main{
 
     min-height:520px;
 
-    border:10px solid var(--crema);
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #a96a7d,
+            #e7d7d1
+        );
+
+    border:
+        10px solid
+        var(--crema);
 
     outline:
         1px solid
-        rgba(178,139,77,.5);
+        rgba(197,161,90,.6);
 
     box-shadow:var(--sombra);
-
-    background:
-        linear-gradient(
-            135deg,
-            #d7c2ac,
-            #8b5661
-        );
 
     display:flex;
 
     align-items:center;
-    justify-content:center;
 
-    text-align:center;
+    justify-content:center;
 
     color:white;
 
@@ -1048,19 +1226,36 @@ button{
     text-transform:uppercase;
 }
 
-.historia-texto h2{
+.photo-main::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:20px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.6);
+}
+
+.story-text h2{
 
     color:var(--borgona);
 
     font-size:
-        clamp(35px,5vw,55px);
+        clamp(
+            35px,
+            5vw,
+            56px
+        );
 
     font-weight:normal;
 
     margin-bottom:25px;
 }
 
-.historia-texto p{
+.story-text p{
 
     font-size:17px;
 
@@ -1069,11 +1264,11 @@ button{
     margin-bottom:20px;
 }
 
-.firma{
+.signature{
 
     color:var(--dorado);
 
-    font-size:26px;
+    font-size:28px;
 
     font-style:italic;
 
@@ -1082,23 +1277,138 @@ button{
 
 
 /* =========================================================
-   GALERÍA
+   BOUQUET INTERACTIVO
 ========================================================= */
 
-.galeria{
+.bouquet{
 
-    background:var(--borgona-oscuro);
+    background:var(--borgona);
+
+    color:white;
+
+    overflow:hidden;
 }
 
-.galeria h2{
-    color:var(--crema);
+.bouquet .section-title h2{
+    color:white;
 }
 
-.galeria .eyebrow{
+.bouquet .eyebrow{
     color:var(--dorado-claro);
 }
 
-.galeria-grid{
+.bouquet-intro{
+
+    max-width:650px;
+
+    margin:
+        0 auto 45px;
+
+    text-align:center;
+
+    line-height:1.9;
+
+    color:#eadfd4;
+}
+
+.bouquet-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    margin-bottom:35px;
+}
+
+.flower-button{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        var(--dorado);
+
+    background:
+        rgba(255,255,255,.05);
+
+    color:var(--dorado-claro);
+
+    cursor:pointer;
+
+    font-size:21px;
+
+    transition:.4s;
+}
+
+.flower-button:hover,
+.flower-button.active{
+
+    background:var(--dorado);
+
+    color:white;
+
+    transform:
+        translateY(-5px)
+        scale(1.08);
+}
+
+.bouquet-content{
+
+    max-width:700px;
+
+    margin:auto;
+
+    text-align:center;
+
+    min-height:150px;
+}
+
+.bouquet-content h3{
+
+    color:var(--dorado-claro);
+
+    font-size:30px;
+
+    font-weight:normal;
+
+    margin-bottom:15px;
+}
+
+.bouquet-content p{
+
+    line-height:1.9;
+
+    color:#eadfd4;
+}
+
+.bouquet-quote{
+
+    margin-top:20px;
+
+    color:white;
+
+    font-style:italic;
+}
+
+
+/* =========================================================
+   GALERIA
+========================================================= */
+
+.gallery{
+
+    background:var(--crema);
+}
+
+.gallery-grid{
 
     display:grid;
 
@@ -1108,7 +1418,7 @@ button{
     gap:15px;
 }
 
-.foto{
+.gallery-photo{
 
     height:420px;
 
@@ -1119,34 +1429,43 @@ button{
     background:
         linear-gradient(
             135deg,
-            #a47a7c,
-            #eadcca
+            #b06b80,
+            #e7d8d0
         );
+
+    transition:.7s;
 }
 
-.foto:nth-child(2){
+.gallery-photo:nth-child(2){
 
     margin-top:45px;
 
     background:
         linear-gradient(
             135deg,
-            #c6a98b,
-            #734750
+            #d4b2aa,
+            #7d304d
         );
 }
 
-.foto:nth-child(3){
+.gallery-photo:nth-child(3){
 
     background:
         linear-gradient(
             135deg,
-            #e6d8c6,
-            #89515d
+            #e8d9cf,
+            #9e526b
         );
 }
 
-.foto-etiqueta{
+.gallery-photo:hover{
+
+    transform:
+        translateY(-10px)
+        scale(1.015);
+}
+
+.gallery-label{
 
     position:absolute;
 
@@ -1166,10 +1485,12 @@ button{
 
     letter-spacing:3px;
 
+    text-transform:uppercase;
+
     background:
         linear-gradient(
-            transparent 45%,
-            rgba(53,16,25,.75)
+            transparent 40%,
+            rgba(84,21,43,.75)
         );
 }
 
@@ -1178,24 +1499,24 @@ button{
    AGRADECIMIENTOS
 ========================================================= */
 
-.agradecimientos{
+.thanks{
 
-    background:var(--crema);
+    background:var(--crema-2);
 
     text-align:center;
 }
 
-.agradecimientos-nombres{
+.thanks-names{
 
-    max-width:700px;
+    max-width:650px;
 
     margin:auto;
 
+    color:var(--borgona);
+
     font-size:19px;
 
-    line-height:2;
-
-    color:var(--borgona);
+    line-height:2.1;
 }
 
 
@@ -1203,14 +1524,14 @@ button{
    DRESS CODE
 ========================================================= */
 
-.dresscode{
+.dress{
 
     background:var(--crema-claro);
 
     text-align:center;
 }
 
-.dress-icon{
+.dress-symbol{
 
     font-size:50px;
 
@@ -1219,7 +1540,56 @@ button{
     margin-bottom:20px;
 }
 
-.dresscode h3{
+.dress h3{
+
+    color:var(--borgona);
+
+    font-size:32px;
+
+    font-weight:normal;
+
+    margin-bottom:18px;
+}
+
+.dress p{
+
+    max-width:650px;
+
+    margin:auto;
+
+    line-height:1.9;
+}
+
+
+/* =========================================================
+   UBICACIÓN
+========================================================= */
+
+.location{
+
+    background:var(--crema);
+}
+
+.location-card{
+
+    max-width:850px;
+
+    margin:auto;
+
+    padding:60px 30px;
+
+    text-align:center;
+
+    background:var(--crema-claro);
+
+    border:
+        1px solid
+        rgba(197,161,90,.3);
+
+    box-shadow:var(--sombra);
+}
+
+.location-card h3{
 
     color:var(--borgona);
 
@@ -1230,71 +1600,22 @@ button{
     margin-bottom:20px;
 }
 
-.dresscode p{
-
-    max-width:650px;
-
-    margin:auto;
+.location-card p{
 
     line-height:1.9;
 
-    font-size:16px;
+    margin-bottom:30px;
 }
 
-
-/* =========================================================
-   UBICACIÓN
-========================================================= */
-
-.ubicacion{
-
-    background:var(--crema);
-}
-
-.ubicacion-card{
-
-    max-width:850px;
-
-    margin:auto;
-
-    background:var(--crema-claro);
-
-    border:
-        1px solid
-        rgba(178,139,77,.25);
-
-    padding:55px 30px;
-
-    text-align:center;
-
-    box-shadow:var(--sombra);
-}
-
-.ubicacion-card h3{
-
-    color:var(--borgona);
-
-    font-size:31px;
-
-    font-weight:normal;
-
-    margin-bottom:20px;
-}
-
-.ubicacion-card p{
-
-    line-height:1.9;
-
-    margin-bottom:28px;
-}
-
-.boton-secundario{
+.map-button{
 
     display:inline-flex;
 
-    padding:14px 27px;
+    padding:15px 28px;
 
-    border:1px solid var(--borgona);
+    border:
+        1px solid
+        var(--borgona);
 
     color:var(--borgona);
 
@@ -1309,11 +1630,11 @@ button{
     transition:.3s;
 }
 
-.boton-secundario:hover{
+.map-button:hover{
 
     background:var(--borgona);
 
-    color:var(--crema);
+    color:white;
 }
 
 
@@ -1321,82 +1642,63 @@ button{
    REGALOS
 ========================================================= */
 
-.regalos{
+.gifts{
 
     background:var(--crema-claro);
-
-    text-align:center;
 }
 
-.regalo-icono{
-
-    font-size:45px;
-
-    color:var(--dorado);
-
-    margin-bottom:20px;
-}
-
-.regalos-intro{
+.gifts-intro{
 
     max-width:700px;
 
-    margin:0 auto 35px;
+    margin:
+        0 auto 40px;
 
-    font-size:17px;
+    text-align:center;
 
     line-height:1.9;
 }
 
-
-/* =========================================================
-   ACORDEÓN DE REGALOS
-========================================================= */
-
-.lista-regalos{
+.gift-list{
 
     max-width:850px;
 
     margin:auto;
-
-    text-align:left;
 }
 
-.regalo-grupo{
+.gift-list details{
 
     margin-bottom:10px;
 
+    background:white;
+
     border:
         1px solid
-        rgba(178,139,77,.25);
-
-    background:white;
+        rgba(197,161,90,.3);
 }
 
-.regalo-grupo summary{
-
-    cursor:pointer;
+.gift-list summary{
 
     list-style:none;
 
-    padding:20px 22px;
+    cursor:pointer;
+
+    padding:20px;
 
     color:var(--borgona);
-
-    font-size:16px;
 
     display:flex;
 
     justify-content:space-between;
 
-    align-items:center;
+    font-size:16px;
 }
 
-.regalo-grupo summary::-webkit-details-marker{
+.gift-list summary::-webkit-details-marker{
     display:none;
 }
 
-.regalo-grupo summary::after{
+.gift-list summary::after{
 
     content:"+";
 
@@ -1405,57 +1707,52 @@ button{
     font-size:22px;
 }
 
-.regalo-grupo[open] summary::after{
+.gift-list details[open]
+summary::after{
     content:"−";
 }
 
-.regalo-contenido{
+.gift-content{
 
-    padding:0 25px 25px;
-
-    color:#51433f;
+    padding:
+        0 25px 25px;
 
     line-height:1.9;
 }
 
-.regalo-contenido ol{
+.gift-content ol{
 
     padding-left:22px;
 }
 
-.regalo-contenido li{
-
+.gift-content li{
     padding:4px 0;
 }
 
 
 /* =========================================================
-   TRANSFERENCIA
+   CUENTAS
 ========================================================= */
 
-.transferencia{
+.bank{
 
-    margin-top:45px;
+    max-width:900px;
 
-    max-width:850px;
-
-    margin-left:auto;
-
-    margin-right:auto;
+    margin:
+        45px auto 0;
 
     padding:45px 25px;
 
+    background:var(--crema);
+
     border:
         1px solid
-        rgba(178,139,77,.3);
-
-    background:
-        var(--crema);
+        rgba(197,161,90,.3);
 
     text-align:center;
 }
 
-.transferencia h3{
+.bank h3{
 
     color:var(--borgona);
 
@@ -1466,14 +1763,14 @@ button{
     margin-bottom:15px;
 }
 
-.transferencia-intro{
+.bank-intro{
 
     line-height:1.8;
 
     margin-bottom:30px;
 }
 
-.cuentas{
+.bank-grid{
 
     display:grid;
 
@@ -1483,7 +1780,7 @@ button{
     gap:15px;
 }
 
-.cuenta{
+.bank-card{
 
     background:white;
 
@@ -1491,12 +1788,12 @@ button{
 
     border:
         1px solid
-        rgba(178,139,77,.2);
+        rgba(197,161,90,.2);
 
     text-align:left;
 }
 
-.cuenta h4{
+.bank-card h4{
 
     color:var(--dorado);
 
@@ -1511,18 +1808,18 @@ button{
     margin-bottom:15px;
 }
 
-.cuenta strong{
+.bank-card strong{
+
+    display:block;
 
     color:var(--borgona);
 
     font-size:15px;
 
-    display:block;
-
     margin-bottom:10px;
 }
 
-.cuenta p{
+.bank-card p{
 
     font-family:Arial,sans-serif;
 
@@ -1533,29 +1830,28 @@ button{
     word-break:break-word;
 }
 
-.yape-plin{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:15px;
+.digital-grid{
 
     max-width:650px;
 
-    margin:20px auto 0;
+    margin:18px auto 0;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
 }
 
 .digital{
 
-    padding:25px;
-
     background:white;
+
+    padding:25px;
 
     border:
         1px solid
-        rgba(178,139,77,.2);
+        rgba(197,161,90,.2);
 }
 
 .digital h4{
@@ -1566,12 +1862,12 @@ button{
 
     letter-spacing:3px;
 
-    font-size:12px;
-
     margin-bottom:10px;
 }
 
 .digital strong{
+
+    display:block;
 
     color:var(--borgona);
 
@@ -1580,9 +1876,9 @@ button{
 
 .digital p{
 
-    font-size:13px;
-
     margin-top:8px;
+
+    font-size:13px;
 }
 
 
@@ -1594,7 +1890,7 @@ button{
 
     background:var(--borgona);
 
-    color:var(--crema);
+    color:white;
 
     text-align:center;
 }
@@ -1605,10 +1901,14 @@ button{
 
 .rsvp h2{
 
-    color:var(--crema);
+    color:white;
 
     font-size:
-        clamp(38px,6vw,60px);
+        clamp(
+            38px,
+            6vw,
+            62px
+        );
 
     font-weight:normal;
 
@@ -1619,22 +1919,23 @@ button{
 
     max-width:650px;
 
-    margin:0 auto 30px;
+    margin:
+        0 auto 30px;
 
     line-height:1.9;
 
-    color:#eadfcf;
+    color:#eadfd4;
 }
 
-.boton-whatsapp{
+.whatsapp{
 
     display:inline-flex;
+
+    padding:16px 30px;
 
     background:var(--dorado);
 
     color:white;
-
-    padding:16px 30px;
 
     font-family:Arial,sans-serif;
 
@@ -1647,11 +1948,11 @@ button{
     transition:.3s;
 }
 
-.boton-whatsapp:hover{
-
-    background:var(--dorado-claro);
+.whatsapp:hover{
 
     transform:translateY(-3px);
+
+    background:var(--dorado-claro);
 }
 
 
@@ -1663,7 +1964,7 @@ button{
 
     min-height:60vh;
 
-    padding:90px 20px;
+    padding:100px 20px;
 
     display:flex;
 
@@ -1677,32 +1978,36 @@ button{
 
         radial-gradient(
             circle at center,
-            rgba(178,139,77,.12),
-            transparent 42%
+            rgba(197,161,90,.13),
+            transparent 40%
         ),
 
         var(--crema);
 }
 
-.final-corazon{
+.final-heart{
+
+    font-size:40px;
 
     color:var(--dorado);
-
-    font-size:38px;
 
     margin-bottom:25px;
 }
 
 .final h2{
 
-    max-width:800px;
+    max-width:850px;
 
     margin:auto;
 
     color:var(--borgona);
 
     font-size:
-        clamp(38px,6vw,68px);
+        clamp(
+            38px,
+            6vw,
+            68px
+        );
 
     font-weight:normal;
 
@@ -1722,7 +2027,7 @@ button{
     line-height:1.9;
 }
 
-.final-nombres{
+.final-names{
 
     margin-top:35px;
 
@@ -1740,18 +2045,18 @@ button{
 
 footer{
 
-    background:var(--borgona-oscuro);
+    background:var(--borgona-dark);
 
-    color:var(--crema);
-
-    text-align:center;
+    color:white;
 
     padding:50px 20px;
+
+    text-align:center;
 }
 
-.footer-nombres{
+.footer-names{
 
-    font-size:31px;
+    font-size:30px;
 
     margin-bottom:15px;
 }
@@ -1760,11 +2065,11 @@ footer p{
 
     font-family:Arial,sans-serif;
 
-    color:var(--dorado-claro);
-
     font-size:9px;
 
     letter-spacing:3px;
+
+    color:var(--dorado-claro);
 
     text-transform:uppercase;
 }
@@ -1774,24 +2079,24 @@ footer p{
    ANIMACIONES SCROLL
 ========================================================= */
 
-.revelar{
+.reveal{
 
     opacity:0;
 
-    transform:translateY(35px);
+    transform:
+        translateY(45px);
 
     transition:
-
         opacity 1s ease,
-
         transform 1s ease;
 }
 
-.revelar.visible{
+.reveal.show{
 
     opacity:1;
 
-    transform:translateY(0);
+    transform:
+        translateY(0);
 }
 
 
@@ -1801,36 +2106,35 @@ footer p{
 
 @media(max-width:850px){
 
-    .eventos-grid{
+    .parents-grid,
+    .story-grid{
+
         grid-template-columns:1fr;
     }
 
-    .historia-grid{
-        grid-template-columns:1fr;
-    }
+    .bank-grid{
 
-    .padres-grid{
-        grid-template-columns:1fr;
-    }
-
-    .cuentas{
         grid-template-columns:1fr;
     }
 
     .timeline-item{
+
         grid-template-columns:
             70px 1fr;
     }
 
     .timeline::before{
+
         left:35px;
     }
 
-    .timeline-item .timeline-text:first-child{
+    .timeline-content:first-child{
+
         display:none;
     }
 
-    .timeline-item .timeline-text:last-child{
+    .timeline-content:last-child{
+
         visibility:visible !important;
 
         text-align:left !important;
@@ -1838,81 +2142,90 @@ footer p{
         grid-column:2;
     }
 
-    .timeline-hora{
+    .timeline-time{
+
         grid-column:1;
+
         grid-row:1;
     }
-
 }
+
 
 @media(max-width:650px){
 
-    .seccion{
-        padding:75px 18px;
+    .section{
+
+        padding:
+            75px 18px;
     }
 
-    .portada::before{
-        inset:14px;
+    .hero::before{
+
+        inset:13px;
     }
 
-    .portada-frase{
+    .hero h1{
+
+        font-size:42px;
+    }
+
+    .hero-text{
+
         font-size:16px;
     }
 
-    .contador{
+    .flower-top{
+
+        width:240px;
+    }
+
+    .flower-bottom{
+
+        width:250px;
+    }
+
+    .countdown-grid{
+
         grid-template-columns:
             repeat(2,1fr);
     }
 
-    .contador-item:nth-child(2){
+    .count-item:nth-child(2){
+
         border-right:none;
     }
 
-    .contador-item:nth-child(-n+2){
+    .count-item:nth-child(-n+2){
+
         border-bottom:
             1px solid
-            rgba(215,189,134,.25);
+            rgba(223,197,139,.25);
     }
 
-    .galeria-grid{
+    .gallery-grid{
+
         grid-template-columns:1fr;
     }
 
-    .foto{
-        height:420px;
+    .gallery-photo{
+
+        height:400px;
     }
 
-    .foto:nth-child(2){
+    .gallery-photo:nth-child(2){
+
         margin-top:0;
     }
 
-    .yape-plin{
+    .digital-grid{
+
         grid-template-columns:1fr;
     }
 
-    .navbar-contenido{
+    .nav-inner{
+
         justify-content:flex-start;
     }
-
-    .portada h1{
-        font-size:43px;
-    }
-
-}
-
-
-/* =========================================================
-   REDUCCION DE MOVIMIENTO
-========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-    *{
-        scroll-behavior:auto !important;
-        animation:none !important;
-        transition:none !important;
-    }
-
 }
 
 </style>
@@ -1929,11 +2242,11 @@ footer p{
 
 <div class="loader" id="loader">
 
-    <div class="loader-corazon">
+    <div class="loader-flor">
         ♥
     </div>
 
-    <div class="loader-texto">
+    <div class="loader-text">
         Preparando nuestra invitación
     </div>
 
@@ -1941,13 +2254,29 @@ footer p{
 
 
 <!-- =====================================================
-     MÚSICA
-     
-     Más adelante colocaremos:
-     audio/musica.mp3
+     PETALOS
 ===================================================== -->
 
-<audio id="musica" loop preload="auto">
+<div class="petals">
+
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+
+</div>
+
+
+<!-- =====================================================
+     AUDIO
+===================================================== -->
+
+<audio
+    id="audio"
+    loop
+    preload="auto">
 
     <source
         src="audio/musica.mp3"
@@ -1957,9 +2286,8 @@ footer p{
 
 
 <button
-    class="boton-musica"
-    id="botonMusica"
-    aria-label="Música">
+    class="music"
+    id="music">
 
     ♪
 
@@ -1971,18 +2299,145 @@ footer p{
 ===================================================== -->
 
 <section
-    class="portada"
+    class="hero"
     id="inicio">
 
-    <div class="orbita"></div>
 
-    <div class="portada-contenido">
+    <!-- FLOR DECORATIVA SUPERIOR -->
 
-        <div class="portada-superior">
-            Nuestra boda
+    <svg
+        class="flower-top"
+        viewBox="0 0 400 300"
+        xmlns="http://www.w3.org/2000/svg">
+
+        <g
+            fill="none"
+            stroke="#d7bd86"
+            stroke-width="1">
+
+            <path
+                d="M30 260
+                   C120 210 110 110 190 50
+                   C245 10 320 20 380 5"/>
+
+            <path
+                d="M70 280
+                   C130 190 200 170 240 90"/>
+
+        </g>
+
+        <g fill="#c88b9d">
+
+            <circle
+                cx="300"
+                cy="55"
+                r="34"/>
+
+            <circle
+                cx="340"
+                cy="95"
+                r="25"/>
+
+            <circle
+                cx="255"
+                cy="92"
+                r="24"/>
+
+        </g>
+
+        <g fill="#a64d68">
+
+            <circle
+                cx="320"
+                cy="55"
+                r="13"/>
+
+            <circle
+                cx="260"
+                cy="92"
+                r="9"/>
+
+        </g>
+
+        <g fill="#dfc58b">
+
+            <circle
+                cx="305"
+                cy="25"
+                r="5"/>
+
+            <circle
+                cx="350"
+                cy="70"
+                r="4"/>
+
+        </g>
+
+    </svg>
+
+
+    <!-- FLOR INFERIOR -->
+
+    <svg
+        class="flower-bottom"
+        viewBox="0 0 400 300"
+        xmlns="http://www.w3.org/2000/svg">
+
+        <g
+            fill="none"
+            stroke="#d7bd86"
+            stroke-width="1">
+
+            <path
+                d="M20 40
+                   C120 90 120 170 200 230
+                   C260 270 330 270 390 295"/>
+
+        </g>
+
+        <g fill="#c88b9d">
+
+            <circle
+                cx="80"
+                cy="100"
+                r="35"/>
+
+            <circle
+                cx="130"
+                cy="150"
+                r="27"/>
+
+            <circle
+                cx="55"
+                cy="170"
+                r="24"/>
+
+        </g>
+
+        <g fill="#a64d68">
+
+            <circle
+                cx="80"
+                cy="100"
+                r="13"/>
+
+            <circle
+                cx="130"
+                cy="150"
+                r="10"/>
+
+        </g>
+
+    </svg>
+
+
+    <div class="hero-content">
+
+        <div class="hero-small">
+            Tenemos el especial agrado
         </div>
 
-        <div class="ornamento">
+        <div class="hero-symbol">
             ✦ · ✦
         </div>
 
@@ -1991,7 +2446,7 @@ footer p{
             Isaí Marcelo
             Sánchez López
 
-            <span class="ampersand">
+            <span>
                 &amp;
             </span>
 
@@ -2000,28 +2455,27 @@ footer p{
 
         </h1>
 
-        <div class="ornamento">
+        <div class="hero-symbol">
             ✦
         </div>
 
-        <div class="portada-fecha">
+        <div class="hero-date">
 
-            Domingo · 29 · Noviembre · 2026
+            DOMINGO · 29 · NOVIEMBRE · 2026
 
         </div>
 
-        <p class="portada-frase">
+        <p class="hero-text">
 
-            Con amor y mucha alegría queremos
-            compartir contigo el inicio de
-            esta nueva historia.
+            «De la amistad nació un amor que nos enseñó
+            a elegirnos cada día; y hoy, con Dios como guía,
+            elegimos amarnos y caminar juntos para toda la vida.»
 
         </p>
 
         <a
             href="#bienvenida"
-            class="boton-principal"
-            id="abrirInvitacion">
+            class="open-button">
 
             Abrir invitación
 
@@ -2033,12 +2487,12 @@ footer p{
 
 
 <!-- =====================================================
-     NAVEGACIÓN
+     NAV
 ===================================================== -->
 
-<nav class="navbar">
+<nav class="nav">
 
-    <div class="navbar-contenido">
+    <div class="nav-inner">
 
         <a href="#bienvenida">
             Inicio
@@ -2048,12 +2502,12 @@ footer p{
             Fecha
         </a>
 
-        <a href="#eventos">
+        <a href="#itinerario">
             Evento
         </a>
 
-        <a href="#itinerario">
-            Itinerario
+        <a href="#historia">
+            Historia
         </a>
 
         <a href="#galeria">
@@ -2082,48 +2536,51 @@ footer p{
 ===================================================== -->
 
 <section
-    class="seccion bienvenida"
+    class="section welcome"
     id="bienvenida">
 
-    <div class="contenedor revelar">
+    <div
+        class="container welcome-card reveal">
 
-        <div class="titulo-seccion">
+        <div class="section-title">
 
             <div class="eyebrow">
-                Con mucha alegría
+                Nuestra historia
             </div>
 
             <h2>
                 ¡Nos casamos!
             </h2>
 
-            <div class="linea-dorada"></div>
+            <div class="gold-line"></div>
 
         </div>
 
-        <div class="inicial">
+
+        <div class="welcome-symbol">
             ♥
         </div>
 
-        <p class="texto-centro">
 
-            Después de compartir sueños,
-            momentos y tantos recuerdos,
-            hemos decidido unir nuestras vidas
-            y comenzar juntos una nueva etapa.
+        <p class="center-text">
+
+            Con mucha alegría queremos compartir
+            contigo el comienzo de esta nueva etapa.
 
             <br><br>
 
-            Queremos celebrar este día tan especial
-            junto a las personas que forman parte
-            de nuestra historia.
+            Después de una historia que comenzó
+            desde la amistad, hoy elegimos caminar
+            juntos para toda la vida.
 
         </p>
 
-        <p class="cita">
 
-            “Que nuestro amor sea siempre
-            el comienzo de una nueva aventura.”
+        <p class="quote">
+
+            «De la amistad nació un amor que nos enseñó
+            a elegirnos cada día; y hoy, con Dios como guía,
+            elegimos amarnos y caminar juntos para toda la vida.»
 
         </p>
 
@@ -2133,85 +2590,86 @@ footer p{
 
 
 <!-- =====================================================
-     CUENTA REGRESIVA
+     CUENTA
 ===================================================== -->
 
 <section
-    class="seccion countdown"
+    class="section countdown"
     id="cuenta">
 
-    <div class="contenedor revelar">
+    <div class="container reveal">
 
-        <div class="titulo-seccion">
+        <div class="section-title">
 
             <div class="eyebrow">
-                Cada vez falta menos
+                Falta muy poco
             </div>
 
             <h2>
                 Cuenta regresiva
             </h2>
 
-            <div class="linea-dorada"></div>
+            <div class="gold-line"></div>
 
         </div>
 
-        <div class="contador">
 
-            <div class="contador-item">
+        <div class="countdown-grid">
+
+            <div class="count-item">
 
                 <span
-                    class="contador-numero"
-                    id="dias">
+                    class="count-number"
+                    id="days">
                     00
                 </span>
 
-                <span class="contador-label">
+                <span class="count-label">
                     Días
                 </span>
 
             </div>
 
 
-            <div class="contador-item">
+            <div class="count-item">
 
                 <span
-                    class="contador-numero"
-                    id="horas">
+                    class="count-number"
+                    id="hours">
                     00
                 </span>
 
-                <span class="contador-label">
+                <span class="count-label">
                     Horas
                 </span>
 
             </div>
 
 
-            <div class="contador-item">
+            <div class="count-item">
 
                 <span
-                    class="contador-numero"
-                    id="minutos">
+                    class="count-number"
+                    id="minutes">
                     00
                 </span>
 
-                <span class="contador-label">
+                <span class="count-label">
                     Minutos
                 </span>
 
             </div>
 
 
-            <div class="contador-item">
+            <div class="count-item">
 
                 <span
-                    class="contador-numero"
-                    id="segundos">
+                    class="count-number"
+                    id="seconds">
                     00
                 </span>
 
-                <span class="contador-label">
+                <span class="count-label">
                     Segundos
                 </span>
 
@@ -2225,138 +2683,26 @@ footer p{
 
 
 <!-- =====================================================
-     EVENTOS
-===================================================== -->
-
-<section
-    class="seccion eventos"
-    id="eventos">
-
-    <div class="contenedor">
-
-        <div class="titulo-seccion revelar">
-
-            <div class="eyebrow">
-                Domingo 29 de noviembre
-            </div>
-
-            <h2>
-                Nuestro gran día
-            </h2>
-
-            <div class="linea-dorada"></div>
-
-        </div>
-
-
-        <div class="eventos-grid">
-
-
-            <article class="evento revelar">
-
-                <div class="evento-icono">
-                    ♡
-                </div>
-
-                <h3>
-                    Ceremonia civil
-                </h3>
-
-                <div class="hora">
-                    15:30 horas
-                </div>
-
-                <p>
-
-                    Av. El Muro Mz. K2 Lote 9 S/N
-
-                    <br><br>
-
-                    Ref. cruce Av. Central
-                    y Av. El Muro
-
-                </p>
-
-            </article>
-
-
-            <article class="evento revelar">
-
-                <div class="evento-icono">
-                    ✦
-                </div>
-
-                <h3>
-                    Recepción
-                </h3>
-
-                <div class="hora">
-                    17:00 horas
-                </div>
-
-                <p>
-
-                    Después de la ceremonia
-                    compartiremos juntos
-                    este momento especial.
-
-                </p>
-
-            </article>
-
-
-            <article class="evento revelar">
-
-                <div class="evento-icono">
-                    ♫
-                </div>
-
-                <h3>
-                    Cena
-                </h3>
-
-                <div class="hora">
-                    19:00 horas
-                </div>
-
-                <p>
-
-                    Una noche para celebrar,
-                    compartir y crear
-                    nuevos recuerdos.
-
-                </p>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
      ITINERARIO
 ===================================================== -->
 
 <section
-    class="seccion itinerario"
+    class="section schedule"
     id="itinerario">
 
-    <div class="contenedor">
+    <div class="container">
 
-        <div class="titulo-seccion revelar">
+        <div class="section-title reveal">
 
             <div class="eyebrow">
-                Acompáñanos
+                Aprovechemos el tiempo
             </div>
 
             <h2>
-                Itinerario
+                Nuestro día
             </h2>
 
-            <div class="linea-dorada"></div>
+            <div class="gold-line"></div>
 
         </div>
 
@@ -2364,22 +2710,25 @@ footer p{
         <div class="timeline">
 
 
-            <div class="timeline-item revelar">
+            <div class="timeline-item reveal">
 
-                <div class="timeline-text"></div>
+                <div class="timeline-content">
 
-                <div class="timeline-hora">
+                </div>
+
+                <div class="timeline-time">
                     15:30
                 </div>
 
-                <div class="timeline-text">
+                <div class="timeline-content">
 
                     <h3>
                         Ceremonia civil
                     </h3>
 
                     <p>
-                        El inicio de nuestro gran día.
+                        El inicio de nuestro
+                        gran día.
                     </p>
 
                 </div>
@@ -2387,9 +2736,9 @@ footer p{
             </div>
 
 
-            <div class="timeline-item revelar">
+            <div class="timeline-item reveal">
 
-                <div class="timeline-text">
+                <div class="timeline-content">
 
                     <h3>
                         Bendición matrimonial
@@ -2403,31 +2752,31 @@ footer p{
 
                 </div>
 
-                <div class="timeline-hora">
+                <div class="timeline-time">
                     ✦
                 </div>
 
-                <div class="timeline-text"></div>
+                <div class="timeline-content"></div>
 
             </div>
 
 
-            <div class="timeline-item revelar">
+            <div class="timeline-item reveal">
 
-                <div class="timeline-text"></div>
+                <div class="timeline-content"></div>
 
-                <div class="timeline-hora">
+                <div class="timeline-time">
                     17:00
                 </div>
 
-                <div class="timeline-text">
+                <div class="timeline-content">
 
                     <h3>
                         Recepción
                     </h3>
 
                     <p>
-                        Comienza la celebración.
+                        Comienza nuestra celebración.
                     </p>
 
                 </div>
@@ -2435,9 +2784,9 @@ footer p{
             </div>
 
 
-            <div class="timeline-item revelar">
+            <div class="timeline-item reveal">
 
-                <div class="timeline-text">
+                <div class="timeline-content">
 
                     <h3>
                         Cena
@@ -2450,24 +2799,24 @@ footer p{
 
                 </div>
 
-                <div class="timeline-hora">
+                <div class="timeline-time">
                     19:00
                 </div>
 
-                <div class="timeline-text"></div>
+                <div class="timeline-content"></div>
 
             </div>
 
 
-            <div class="timeline-item revelar">
+            <div class="timeline-item reveal">
 
-                <div class="timeline-text"></div>
+                <div class="timeline-content"></div>
 
-                <div class="timeline-hora">
+                <div class="timeline-time">
                     20:00
                 </div>
 
-                <div class="timeline-text">
+                <div class="timeline-content">
 
                     <h3>
                         Tradicional Palpa
@@ -2494,30 +2843,30 @@ footer p{
 ===================================================== -->
 
 <section
-    class="seccion padres"
+    class="section parents"
     id="padres">
 
-    <div class="contenedor">
+    <div class="container">
 
-        <div class="titulo-seccion revelar">
+        <div class="section-title reveal">
 
             <div class="eyebrow">
-                Con gratitud
+                Con amor y gratitud
             </div>
 
             <h2>
                 Nuestros padres
             </h2>
 
-            <div class="linea-dorada"></div>
+            <div class="gold-line"></div>
 
         </div>
 
 
-        <div class="padres-grid">
+        <div class="parents-grid">
 
 
-            <div class="padres-card revelar">
+            <div class="parent-card reveal">
 
                 <h3>
                     Padres de la novia
@@ -2536,7 +2885,7 @@ footer p{
             </div>
 
 
-            <div class="padres-card revelar">
+            <div class="parent-card reveal">
 
                 <h3>
                     Padres del novio
@@ -2554,7 +2903,6 @@ footer p{
 
             </div>
 
-
         </div>
 
     </div>
@@ -2567,23 +2915,21 @@ footer p{
 ===================================================== -->
 
 <section
-    class="seccion historia"
+    class="section story"
     id="historia">
 
-    <div class="contenedor historia-grid">
+    <div class="container story-grid">
 
 
-        <div
-            class="foto-principal revelar">
+        <div class="photo-main reveal">
 
-            Aquí irá nuestra
-            fotografía principal
+            AQUÍ IRÁ
+            NUESTRA FOTO
 
         </div>
 
 
-        <div
-            class="historia-texto revelar">
+        <div class="story-text reveal">
 
             <div class="eyebrow">
                 Nuestra historia
@@ -2591,27 +2937,27 @@ footer p{
 
             <h2>
                 Dos caminos,
-                un solo destino.
+                una historia.
             </h2>
 
             <p>
 
-                Hoy celebramos el amor que nos une
-                y la decisión de caminar juntos
-                hacia una nueva etapa de nuestras vidas.
+                La amistad fue el comienzo de una
+                historia que poco a poco se transformó
+                en amor.
 
             </p>
 
             <p>
 
-                Queremos que este día sea también
-                un recuerdo especial para quienes
-                han acompañado nuestra historia.
+                Hoy, con Dios como guía, elegimos
+                caminar juntos y construir nuestro
+                hogar.
 
             </p>
 
-            <div class="firma">
-                Isaí & Ebony ♥
+            <div class="signature">
+                Isaí & Ebony
             </div>
 
         </div>
@@ -2622,54 +2968,170 @@ footer p{
 
 
 <!-- =====================================================
-     GALERÍA
+     BOUQUET INTERACTIVO
 ===================================================== -->
 
 <section
-    class="seccion galeria"
-    id="galeria">
+    class="section bouquet"
+    id="bouquet">
 
-    <div class="contenedor">
+    <div class="container">
 
-        <div class="titulo-seccion revelar">
+
+        <div class="section-title reveal">
 
             <div class="eyebrow">
-                Nuestros recuerdos
+                Un detalle para nuestros invitados
             </div>
 
             <h2>
-                Momentos
+                Nuestro Bouquet
             </h2>
 
-            <div class="linea-dorada"></div>
+            <div class="gold-line"></div>
 
         </div>
 
 
-        <div class="galeria-grid">
+        <p class="bouquet-intro reveal">
+
+            Selecciona una flor y descubre
+            un deseo que queremos compartir
+            contigo en este día tan especial.
+
+        </p>
 
 
-            <div class="foto revelar">
+        <div class="bouquet-buttons reveal">
 
-                <div class="foto-etiqueta">
+
+            <button
+                class="flower-button active"
+                data-title="Amor"
+                data-text="Su presencia es el mejor regalo que podríamos recibir. Gracias por acompañarnos en el comienzo de nuestra nueva vida juntos."
+                data-quote="El amor es la razón de todo lo que hoy celebramos.">
+
+                ♡
+
+            </button>
+
+
+            <button
+                class="flower-button"
+                data-title="Puntualidad"
+                data-text="Cada momento ha sido preparado con cariño. Les pedimos llegar con anticipación para vivir juntos cada detalle desde el inicio."
+                data-quote="El tiempo es uno de los regalos más preciosos.">
+
+                ✿
+
+            </button>
+
+
+            <button
+                class="flower-button"
+                data-title="Respeto"
+                data-text="Queremos vivir nuestra ceremonia plenamente, por eso agradecemos acompañarnos con respeto y cariño durante este momento."
+                data-quote="El respeto también es una forma de amor.">
+
+                ❀
+
+            </button>
+
+
+            <button
+                class="flower-button"
+                data-title="Gratitud"
+                data-text="Gracias por formar parte de nuestra historia y por compartir con nosotros uno de los días más importantes de nuestras vidas."
+                data-quote="Gracias por ser parte de nuestra historia.">
+
+                ✦
+
+            </button>
+
+
+        </div>
+
+
+        <div class="bouquet-content reveal">
+
+            <h3 id="bouquetTitle">
+                Amor
+            </h3>
+
+            <p id="bouquetText">
+
+                Su presencia es el mejor regalo que
+                podríamos recibir. Gracias por
+                acompañarnos en el comienzo de
+                nuestra nueva vida juntos.
+
+            </p>
+
+            <p
+                class="bouquet-quote"
+                id="bouquetQuote">
+
+                El amor es la razón de todo
+                lo que hoy celebramos.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GALERIA
+===================================================== -->
+
+<section
+    class="section gallery"
+    id="galeria">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <div class="eyebrow">
+                Nuestra historia
+            </div>
+
+            <h2>
+                Momentos juntos
+            </h2>
+
+            <div class="gold-line"></div>
+
+        </div>
+
+
+        <div class="gallery-grid">
+
+
+            <div class="gallery-photo reveal">
+
+                <div class="gallery-label">
                     Nuestra historia
                 </div>
 
             </div>
 
 
-            <div class="foto revelar">
+            <div class="gallery-photo reveal">
 
-                <div class="foto-etiqueta">
+                <div class="gallery-label">
                     Momentos especiales
                 </div>
 
             </div>
 
 
-            <div class="foto revelar">
+            <div class="gallery-photo reveal">
 
-                <div class="foto-etiqueta">
+                <div class="gallery-label">
                     Juntos
                 </div>
 
@@ -2688,11 +3150,11 @@ footer p{
 ===================================================== -->
 
 <section
-    class="seccion agradecimientos">
+    class="section thanks">
 
-    <div class="contenedor revelar">
+    <div class="container reveal">
 
-        <div class="titulo-seccion">
+        <div class="section-title">
 
             <div class="eyebrow">
                 Con especial cariño
@@ -2702,12 +3164,12 @@ footer p{
                 Agradecimientos
             </h2>
 
-            <div class="linea-dorada"></div>
+            <div class="gold-line"></div>
 
         </div>
 
 
-        <div class="agradecimientos-nombres">
+        <div class="thanks-names">
 
             Angelo Valdez Cervantes
 
@@ -2731,16 +3193,16 @@ footer p{
 ===================================================== -->
 
 <section
-    class="seccion dresscode">
+    class="section dress">
 
-    <div class="contenedor revelar">
+    <div class="container reveal">
 
-        <div class="dress-icon">
+        <div class="dress-symbol">
             ✧
         </div>
 
         <div class="eyebrow">
-            Código de vestimenta
+            Dress Code
         </div>
 
         <h3>
@@ -2750,13 +3212,13 @@ footer p{
         <p>
 
             Queremos que nos acompañes
-            en este día tan especial
-            luciendo tu mejor versión.
+            celebrando este día tan especial
+            con tu mejor versión.
 
             <br><br>
 
             <strong>
-                Dress Code: ELEGANTE
+                Formal elegante
             </strong>
 
         </p>
@@ -2767,16 +3229,16 @@ footer p{
 
 
 <!-- =====================================================
-     UBICACIÓN
-========================================================= -->
+     UBICACION
+===================================================== -->
 
 <section
-    class="seccion ubicacion"
+    class="section location"
     id="ubicacion">
 
-    <div class="contenedor">
+    <div class="container">
 
-        <div class="titulo-seccion revelar">
+        <div class="section-title reveal">
 
             <div class="eyebrow">
                 Te esperamos
@@ -2786,15 +3248,15 @@ footer p{
                 ¿Cómo llegar?
             </h2>
 
-            <div class="linea-dorada"></div>
+            <div class="gold-line"></div>
 
         </div>
 
 
-        <div class="ubicacion-card revelar">
+        <div class="location-card reveal">
 
             <h3>
-                Av. El Muro
+                Ceremonia & Recepción
             </h3>
 
             <p>
@@ -2817,18 +3279,12 @@ footer p{
             </p>
 
 
-            <!--
-            ESTE ENLACE LO CAMBIAREMOS
-            CUANDO TENGAMOS EL PIN EXACTO
-            DE GOOGLE MAPS.
-            -->
-
             <a
                 href="https://www.google.com/maps/search/?api=1&query=Av.%20El%20Muro%20Mz.%20K2%20Lote%209%20S%2FN%20Av.%20Central%20El%20Muro"
                 target="_blank"
-                class="boton-secundario">
+                class="map-button">
 
-                Ver ubicación en Maps
+                Ver en Google Maps ↗
 
             </a>
 
@@ -2840,62 +3296,54 @@ footer p{
 
 
 <!-- =====================================================
-     MESA DE REGALOS
+     REGALOS
 ===================================================== -->
 
 <section
-    class="seccion regalos"
+    class="section gifts"
     id="regalos">
 
-    <div class="contenedor">
+    <div class="container">
 
 
-        <div class="titulo-seccion revelar">
-
-            <div class="regalo-icono">
-                ♡
-            </div>
+        <div class="section-title reveal">
 
             <div class="eyebrow">
                 Para nuestro nuevo hogar
             </div>
 
             <h2>
-                Mesa de regalos
+                Mesa de Regalos
             </h2>
 
-            <div class="linea-dorada"></div>
+            <div class="gold-line"></div>
 
         </div>
 
 
-        <p class="regalos-intro revelar">
+        <p class="gifts-intro reveal">
 
             Lo más importante para nosotros
-            es contar con tu presencia.
+            es compartir este momento contigo.
 
             <br><br>
 
-            Si deseas acompañarnos con un detalle,
-            compartimos algunas ideas que serán
-            muy especiales para nuestro nuevo hogar.
+            Si deseas tener un detalle adicional,
+            hemos preparado algunas ideas que
+            nos ayudarán en esta nueva etapa.
 
         </p>
 
 
-        <!-- =================================================
-             LISTA DE REGALOS
-        ================================================= -->
+        <div class="gift-list reveal">
 
-        <div class="lista-regalos revelar">
-
-            <details class="regalo-grupo" open>
+            <details open>
 
                 <summary>
                     Lista de regalos
                 </summary>
 
-                <div class="regalo-contenido">
+                <div class="gift-content">
 
                     <ol>
 
@@ -2956,8 +3404,7 @@ footer p{
                         </li>
 
                         <li>
-                            Juego comedor 6 personas
-                            para departamento
+                            Juego comedor 6 personas para departamento
                         </li>
 
                         <li>
@@ -3033,31 +3480,27 @@ footer p{
         </div>
 
 
-        <!-- =================================================
-             TRANSFERENCIAS
-        ================================================= -->
+        <!-- CUENTAS -->
 
-        <div class="transferencia revelar">
+        <div class="bank reveal">
 
             <h3>
                 Transferencia bancaria
             </h3>
 
-            <p class="transferencia-intro">
+            <p class="bank-intro">
 
                 Si deseas realizar tu regalo mediante
-                transferencia, puedes utilizar cualquiera
-                de las siguientes cuentas.
+                transferencia, puedes hacerlo a través
+                de cualquiera de estas cuentas.
 
             </p>
 
 
-            <div class="cuentas">
+            <div class="bank-grid">
 
 
-                <!-- BCP -->
-
-                <div class="cuenta">
+                <div class="bank-card">
 
                     <h4>
                         BCP
@@ -3088,9 +3531,7 @@ footer p{
                 </div>
 
 
-                <!-- SCOTIABANK -->
-
-                <div class="cuenta">
+                <div class="bank-card">
 
                     <h4>
                         Scotiabank
@@ -3121,9 +3562,7 @@ footer p{
                 </div>
 
 
-                <!-- BANCO DE LA NACIÓN -->
-
-                <div class="cuenta">
+                <div class="bank-card">
 
                     <h4>
                         Banco de la Nación
@@ -3157,11 +3596,7 @@ footer p{
             </div>
 
 
-            <!-- =================================================
-                 YAPE / PLIN
-            ================================================= -->
-
-            <div class="yape-plin">
+            <div class="digital-grid">
 
 
                 <div class="digital">
@@ -3212,10 +3647,10 @@ footer p{
 ===================================================== -->
 
 <section
-    class="seccion rsvp"
+    class="section rsvp"
     id="rsvp">
 
-    <div class="contenedor revelar">
+    <div class="container reveal">
 
         <div class="eyebrow">
             Queremos contar contigo
@@ -3228,24 +3663,28 @@ footer p{
         <p>
 
             Será una alegría enorme compartir
-            este momento contigo.
+            contigo este momento tan especial.
 
             <br><br>
 
-            Confirma tu asistencia por WhatsApp.
+            Confirma tu asistencia.
 
         </p>
 
 
         <!--
-        CAMBIAREMOS ESTE NÚMERO POR EL
-        WHATSAPP QUE UTILIZARÁN PARA RSVP.
+        IMPORTANTE:
+        Aquí NO voy a asumir que Yape es el
+        número de WhatsApp para RSVP.
+
+        Cuando me des el número de WhatsApp
+        correcto lo colocaremos aquí.
         -->
 
         <a
-            href="https://wa.me/51922204239?text=Hola%2C%20quiero%20confirmar%20mi%20asistencia%20a%20la%20boda%20de%20Isa%C3%AD%20y%20Ebony."
+            href="https://wa.me/51999999999?text=Hola%2C%20quiero%20confirmar%20mi%20asistencia%20a%20la%20boda%20de%20Isa%C3%AD%20y%20Ebony."
             target="_blank"
-            class="boton-whatsapp">
+            class="whatsapp">
 
             Confirmar asistencia
 
@@ -3257,14 +3696,14 @@ footer p{
 
 
 <!-- =====================================================
-     MENSAJE FINAL
+     FINAL
 ===================================================== -->
 
 <section class="final">
 
-    <div class="final-contenido revelar">
+    <div class="container reveal">
 
-        <div class="final-corazon">
+        <div class="final-heart">
             ♥
         </div>
 
@@ -3277,13 +3716,15 @@ footer p{
 
         <p>
 
-            Esperamos compartir contigo
-            uno de los días más importantes
-            de nuestras vidas.
+            Con la bendición de Dios,
+            de nuestros padres, familia
+            y seres queridos, queremos
+            compartir contigo este momento
+            tan especial.
 
         </p>
 
-        <div class="final-nombres">
+        <div class="final-names">
 
             Isaí & Ebony
 
@@ -3300,7 +3741,7 @@ footer p{
 
 <footer>
 
-    <div class="footer-nombres">
+    <div class="footer-names">
 
         Isaí & Ebony
 
@@ -3308,19 +3749,14 @@ footer p{
 
     <p>
 
-        Nuestra boda · 29 · 11 · 2026
+        Domingo · 29 · Noviembre · 2026
 
     </p>
 
 </footer>
 
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
 <script>
-
 
 /* =========================================================
    LOADER
@@ -3336,10 +3772,10 @@ window.addEventListener(
                 document
                     .getElementById("loader")
                     .classList
-                    .add("oculto");
+                    .add("hide");
 
             },
-            700
+            800
         );
 
     }
@@ -3348,141 +3784,137 @@ window.addEventListener(
 
 /* =========================================================
    CUENTA REGRESIVA
-
-   Domingo 29 noviembre 2026
-   15:00 horas
-   Perú UTC-5
 ========================================================= */
 
-const fechaBoda =
+const weddingDate =
     new Date(
         "2026-11-29T15:00:00-05:00"
     ).getTime();
 
 
-function actualizarCuenta(){
+function updateCountdown(){
 
-    const ahora =
+    const now =
         new Date().getTime();
 
-    const diferencia =
-        fechaBoda - ahora;
+    const distance =
+        weddingDate - now;
 
 
-    if(diferencia <= 0){
+    if(distance <= 0){
 
-        document.getElementById("dias")
+        document.getElementById("days")
             .textContent="00";
 
-        document.getElementById("horas")
+        document.getElementById("hours")
             .textContent="00";
 
-        document.getElementById("minutos")
+        document.getElementById("minutes")
             .textContent="00";
 
-        document.getElementById("segundos")
+        document.getElementById("seconds")
             .textContent="00";
 
         return;
     }
 
 
-    const dias =
+    const days =
         Math.floor(
-            diferencia /
+            distance /
             (1000*60*60*24)
         );
 
 
-    const horas =
+    const hours =
         Math.floor(
             (
-                diferencia /
+                distance /
                 (1000*60*60)
             ) % 24
         );
 
 
-    const minutos =
+    const minutes =
         Math.floor(
             (
-                diferencia /
+                distance /
                 (1000*60)
             ) % 60
         );
 
 
-    const segundos =
+    const seconds =
         Math.floor(
             (
-                diferencia /
+                distance /
                 1000
             ) % 60
         );
 
 
-    document.getElementById("dias")
+    document.getElementById("days")
         .textContent =
-        String(dias)
+        String(days)
         .padStart(2,"0");
 
 
-    document.getElementById("horas")
+    document.getElementById("hours")
         .textContent =
-        String(horas)
+        String(hours)
         .padStart(2,"0");
 
 
-    document.getElementById("minutos")
+    document.getElementById("minutes")
         .textContent =
-        String(minutos)
+        String(minutes)
         .padStart(2,"0");
 
 
-    document.getElementById("segundos")
+    document.getElementById("seconds")
         .textContent =
-        String(segundos)
+        String(seconds)
         .padStart(2,"0");
 
 }
 
 
-actualizarCuenta();
+updateCountdown();
 
 setInterval(
-    actualizarCuenta,
+    updateCountdown,
     1000
 );
 
 
 /* =========================================================
-   ANIMACIONES SCROLL
+   REVEAL AL HACER SCROLL
 ========================================================= */
 
-const elementos =
+const revealElements =
     document.querySelectorAll(
-        ".revelar"
+        ".reveal"
     );
 
 
-const observador =
+const observer =
     new IntersectionObserver(
 
-        function(entradas){
+        function(entries){
 
-            entradas.forEach(
-                function(entrada){
+            entries.forEach(
+                function(entry){
 
                     if(
-                        entrada.isIntersecting
+                        entry.isIntersecting
                     ){
 
-                        entrada.target
+                        entry.target
                             .classList
-                            .add("visible");
+                            .add("show");
 
-                        observador.unobserve(
-                            entrada.target
+                        observer.unobserve(
+                            entry.target
                         );
 
                     }
@@ -3499,11 +3931,76 @@ const observador =
     );
 
 
-elementos.forEach(
-    function(elemento){
+revealElements.forEach(
+    function(element){
 
-        observador.observe(
-            elemento
+        observer.observe(element);
+
+    }
+);
+
+
+/* =========================================================
+   BOUQUET INTERACTIVO
+========================================================= */
+
+const flowers =
+    document.querySelectorAll(
+        ".flower-button"
+    );
+
+const bouquetTitle =
+    document.getElementById(
+        "bouquetTitle"
+    );
+
+const bouquetText =
+    document.getElementById(
+        "bouquetText"
+    );
+
+const bouquetQuote =
+    document.getElementById(
+        "bouquetQuote"
+    );
+
+
+flowers.forEach(
+    function(button){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                flowers.forEach(
+                    function(item){
+
+                        item.classList
+                            .remove("active");
+
+                    }
+                );
+
+
+                button.classList
+                    .add("active");
+
+
+                bouquetTitle
+                    .textContent =
+                    button.dataset.title;
+
+
+                bouquetText
+                    .textContent =
+                    button.dataset.text;
+
+
+                bouquetQuote
+                    .textContent =
+                    button.dataset.quote;
+
+            }
         );
 
     }
@@ -3511,40 +4008,38 @@ elementos.forEach(
 
 
 /* =========================================================
-   MÚSICA
+   MUSICA
 ========================================================= */
 
-const musica =
+const audio =
     document.getElementById(
-        "musica"
+        "audio"
     );
 
-const botonMusica =
+const music =
     document.getElementById(
-        "botonMusica"
+        "music"
     );
 
-let musicaActiva=false;
+let playing=false;
 
 
-botonMusica.addEventListener(
+music.addEventListener(
     "click",
     function(){
 
-        if(!musicaActiva){
+        if(!playing){
 
-            musica.play()
+            audio.play()
                 .then(
                     function(){
 
-                        musicaActiva=true;
+                        playing=true;
 
-                        botonMusica
-                            .classList
-                            .add("activo");
+                        music.classList
+                            .add("playing");
 
-                        botonMusica
-                            .textContent="❚❚";
+                        music.textContent="❚❚";
 
                     }
                 )
@@ -3552,7 +4047,7 @@ botonMusica.addEventListener(
                     function(){
 
                         alert(
-                            "Primero debemos agregar la música a la carpeta audio."
+                            "Primero debemos agregar el archivo audio/musica.mp3"
                         );
 
                     }
@@ -3562,16 +4057,14 @@ botonMusica.addEventListener(
 
         else{
 
-            musica.pause();
+            audio.pause();
 
-            musicaActiva=false;
+            playing=false;
 
-            botonMusica
-                .classList
-                .remove("activo");
+            music.classList
+                .remove("playing");
 
-            botonMusica
-                .textContent="♪";
+            music.textContent="♪";
 
         }
 
@@ -3580,31 +4073,27 @@ botonMusica.addEventListener(
 
 
 /* =========================================================
-   BOTÓN ABRIR INVITACIÓN
+   ABRIR INVITACIÓN
 ========================================================= */
 
 document
-    .getElementById(
-        "abrirInvitacion"
-    )
+    .querySelector(".open-button")
     .addEventListener(
         "click",
         function(){
 
-            if(!musicaActiva){
+            if(!playing){
 
-                musica.play()
+                audio.play()
                     .then(
                         function(){
 
-                            musicaActiva=true;
+                            playing=true;
 
-                            botonMusica
-                                .classList
-                                .add("activo");
+                            music.classList
+                                .add("playing");
 
-                            botonMusica
-                                .textContent="❚❚";
+                            music.textContent="❚❚";
 
                         }
                     )
@@ -3614,11 +4103,10 @@ document
                             /*
 
                             Algunos navegadores
-                            bloquean el audio
-                            automáticamente.
+                            bloquean el autoplay.
 
-                            La invitación
-                            continuará funcionando.
+                            El usuario puede activar
+                            la música manualmente.
 
                             */
 
@@ -3630,9 +4118,7 @@ document
         }
     );
 
-
 </script>
-
 
 </body>
 </html>
