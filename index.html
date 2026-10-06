@@ -1,196 +1,3638 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Nuestra Boda</title>
+<meta charset="UTF-8">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            min-height: 100%;
-        }
+<meta name="theme-color" content="#5b1f2a">
 
-        body {
-            background: #f6efe3;
-            color: #641f2a;
-            font-family: Georgia, "Times New Roman", serif;
-        }
+<title>Isaí & Ebony | Nuestra Boda</title>
 
-        .portada {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 30px 20px;
-            position: relative;
-            overflow: hidden;
-        }
+<style>
 
-        .portada::before,
-        .portada::after {
-            content: "";
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            border: 1px solid #b08a4a;
-            border-radius: 50%;
-            opacity: 0.35;
-        }
+/* =========================================================
+   PALETA
+========================================================= */
 
-        .portada::before {
-            top: -90px;
-            left: -90px;
-        }
+:root{
+    --borgona:#5b1f2a;
+    --borgona-oscuro:#351019;
+    --borgona-claro:#7a3440;
 
-        .portada::after {
-            bottom: -90px;
-            right: -90px;
-        }
+    --crema:#f7efe2;
+    --crema-claro:#fdfaf4;
+    --crema-oscuro:#eadcc8;
 
-        .contenido {
-            max-width: 600px;
-            width: 100%;
-            position: relative;
-            z-index: 2;
-        }
+    --dorado:#b28b4d;
+    --dorado-claro:#d7bd86;
 
-        .pequeno {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            letter-spacing: 4px;
-            margin-bottom: 25px;
-        }
+    --texto:#302522;
+    --blanco:#ffffff;
 
-        .adorno {
-            color: #b08a4a;
-            font-size: 24px;
-            margin: 10px 0;
-        }
+    --sombra:0 18px 50px rgba(50,25,25,.14);
+}
 
-        h1 {
-            font-size: clamp(48px, 12vw, 90px);
-            font-weight: normal;
-            line-height: 1;
-            margin: 20px 0;
-        }
 
-        .ampersand {
-            display: block;
-            font-size: 35px;
-            color: #b08a4a;
-            margin: 12px 0;
-        }
+/* =========================================================
+   RESET
+========================================================= */
 
-        .fecha {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            letter-spacing: 5px;
-            margin: 30px 0;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        .mensaje {
-            font-size: 18px;
-            line-height: 1.7;
-            font-style: italic;
-            max-width: 430px;
-            margin: 0 auto 35px;
-        }
+html{
+    scroll-behavior:smooth;
+}
 
-        .boton {
-            display: inline-block;
-            background: #641f2a;
-            color: #f6efe3;
-            text-decoration: none;
-            padding: 15px 32px;
-            letter-spacing: 2px;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            transition: 0.3s ease;
-        }
+body{
+    background:var(--crema);
+    color:var(--texto);
 
-        .boton:hover {
-            background: #3d111a;
-            transform: translateY(-2px);
-        }
+    font-family:Georgia,"Times New Roman",serif;
 
-        .linea {
-            width: 90px;
-            height: 1px;
-            background: #b08a4a;
-            margin: 20px auto;
-        }
+    overflow-x:hidden;
+}
 
-        @media (max-width: 600px) {
+a{
+    color:inherit;
+    text-decoration:none;
+}
 
-            .portada {
-                padding: 25px 18px;
-            }
+button{
+    font-family:inherit;
+}
 
-            h1 {
-                font-size: 55px;
-            }
 
-            .mensaje {
-                font-size: 16px;
-            }
+/* =========================================================
+   LOADER
+========================================================= */
 
-            .fecha {
-                font-size: 12px;
-                letter-spacing: 3px;
-            }
-        }
-    </style>
+.loader{
+    position:fixed;
+    inset:0;
+
+    background:var(--crema);
+
+    z-index:99999;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+.loader.oculto{
+    opacity:0;
+    visibility:hidden;
+}
+
+.loader-corazon{
+    color:var(--dorado);
+
+    font-size:42px;
+
+    animation:
+        latido 1.2s infinite;
+}
+
+.loader-texto{
+    margin-top:18px;
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    color:var(--borgona);
+}
+
+@keyframes latido{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.18);
+    }
+
+}
+
+
+/* =========================================================
+   BOTÓN DE MÚSICA
+========================================================= */
+
+.boton-musica{
+
+    position:fixed;
+
+    right:18px;
+    bottom:18px;
+
+    width:50px;
+    height:50px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.4);
+
+    background:var(--borgona);
+
+    color:var(--crema);
+
+    z-index:9000;
+
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:17px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.2);
+
+    transition:.3s;
+}
+
+.boton-musica:hover{
+    transform:scale(1.08);
+}
+
+.boton-musica.activo{
+    animation:pulso 2s infinite;
+}
+
+@keyframes pulso{
+
+    0%{
+        box-shadow:
+        0 0 0 0 rgba(178,139,77,.5);
+    }
+
+    70%{
+        box-shadow:
+        0 0 0 12px rgba(178,139,77,0);
+    }
+
+    100%{
+        box-shadow:
+        0 0 0 0 rgba(178,139,77,0);
+    }
+
+}
+
+
+/* =========================================================
+   PORTADA
+========================================================= */
+
+.portada{
+
+    min-height:100svh;
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    color:var(--crema);
+
+    background:
+
+    radial-gradient(
+        circle at 20% 20%,
+        rgba(215,189,134,.17),
+        transparent 27%
+    ),
+
+    radial-gradient(
+        circle at 85% 80%,
+        rgba(178,139,77,.12),
+        transparent 28%
+    ),
+
+    var(--borgona-oscuro);
+}
+
+.portada::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:22px;
+
+    border:1px solid
+        rgba(215,189,134,.48);
+
+    pointer-events:none;
+}
+
+.portada::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    border:1px solid
+        rgba(215,189,134,.15);
+
+    border-radius:50%;
+
+    top:-260px;
+    right:-160px;
+}
+
+.orbita{
+
+    position:absolute;
+
+    width:380px;
+    height:380px;
+
+    border:1px solid
+        rgba(215,189,134,.12);
+
+    border-radius:50%;
+
+    bottom:-230px;
+    left:-180px;
+}
+
+.portada-contenido{
+
+    width:min(950px,90%);
+
+    position:relative;
+
+    z-index:2;
+
+    animation:
+        entradaPortada 1.5s ease both;
+}
+
+@keyframes entradaPortada{
+
+    from{
+        opacity:0;
+        transform:translateY(35px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+.portada-superior{
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:5px;
+
+    text-transform:uppercase;
+
+    color:var(--dorado-claro);
+
+    margin-bottom:25px;
+}
+
+.ornamento{
+
+    color:var(--dorado-claro);
+
+    font-size:23px;
+
+    letter-spacing:10px;
+
+    margin:15px 0;
+}
+
+.portada h1{
+
+    font-size:
+        clamp(42px,7vw,86px);
+
+    font-weight:normal;
+
+    line-height:.95;
+
+    margin:18px 0;
+}
+
+.portada h1 .ampersand{
+
+    display:block;
+
+    font-size:
+        clamp(27px,4vw,43px);
+
+    color:var(--dorado-claro);
+
+    margin:13px 0;
+}
+
+.portada-fecha{
+
+    font-family:Arial,sans-serif;
+
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    color:var(--crema-oscuro);
+
+    margin-top:30px;
+
+    text-transform:uppercase;
+}
+
+.portada-frase{
+
+    max-width:650px;
+
+    margin:30px auto 35px;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    font-style:italic;
+
+    color:#f2e7d8;
+}
+
+.boton-principal{
+
+    display:inline-flex;
+
+    justify-content:center;
+    align-items:center;
+
+    min-width:220px;
+
+    padding:16px 30px;
+
+    background:var(--dorado);
+
+    color:white;
+
+    border:1px solid var(--dorado);
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    transition:.35s;
+}
+
+.boton-principal:hover{
+
+    background:transparent;
+
+    color:var(--dorado-claro);
+
+    transform:translateY(-3px);
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+
+.navbar{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:8000;
+
+    background:
+        rgba(253,250,244,.96);
+
+    backdrop-filter:blur(12px);
+
+    border-bottom:
+        1px solid
+        rgba(178,139,77,.22);
+}
+
+.navbar-contenido{
+
+    max-width:1150px;
+
+    min-height:64px;
+
+    margin:auto;
+
+    padding:0 18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:25px;
+
+    overflow-x:auto;
+
+    scrollbar-width:none;
+}
+
+.navbar-contenido::-webkit-scrollbar{
+    display:none;
+}
+
+.navbar a{
+
+    white-space:nowrap;
+
+    font-family:Arial,sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    color:var(--borgona);
+
+    transition:.3s;
+}
+
+.navbar a:hover{
+    color:var(--dorado);
+}
+
+
+/* =========================================================
+   SECCIONES
+========================================================= */
+
+.seccion{
+
+    padding:100px 20px;
+
+    position:relative;
+}
+
+.contenedor{
+
+    max-width:1100px;
+
+    margin:auto;
+}
+
+.titulo-seccion{
+
+    text-align:center;
+
+    margin-bottom:55px;
+}
+
+.eyebrow{
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    color:var(--dorado);
+
+    margin-bottom:16px;
+}
+
+.titulo-seccion h2{
+
+    font-size:
+        clamp(34px,5vw,56px);
+
+    font-weight:normal;
+
+    color:var(--borgona);
+}
+
+.linea-dorada{
+
+    width:70px;
+
+    height:1px;
+
+    background:var(--dorado);
+
+    margin:22px auto;
+}
+
+.texto-centro{
+
+    max-width:760px;
+
+    margin:auto;
+
+    text-align:center;
+
+    font-size:17px;
+
+    line-height:1.9;
+}
+
+
+/* =========================================================
+   BIENVENIDA
+========================================================= */
+
+.bienvenida{
+
+    background:
+        var(--crema-claro);
+}
+
+.inicial{
+
+    width:90px;
+    height:90px;
+
+    margin:0 auto 30px;
+
+    border:1px solid var(--dorado);
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    color:var(--borgona);
+
+    font-size:35px;
+}
+
+.cita{
+
+    max-width:720px;
+
+    margin:35px auto 0;
+
+    text-align:center;
+
+    font-size:21px;
+
+    line-height:1.8;
+
+    color:var(--borgona);
+
+    font-style:italic;
+}
+
+
+/* =========================================================
+   CUENTA REGRESIVA
+========================================================= */
+
+.countdown{
+
+    background:var(--borgona);
+
+    color:var(--crema);
+
+    text-align:center;
+}
+
+.countdown .eyebrow{
+    color:var(--dorado-claro);
+}
+
+.countdown h2{
+    color:var(--crema);
+}
+
+.contador{
+
+    max-width:850px;
+
+    margin:50px auto 0;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    border-top:
+        1px solid
+        rgba(215,189,134,.35);
+
+    border-bottom:
+        1px solid
+        rgba(215,189,134,.35);
+}
+
+.contador-item{
+
+    padding:35px 10px;
+
+    border-right:
+        1px solid
+        rgba(215,189,134,.23);
+}
+
+.contador-item:last-child{
+    border-right:none;
+}
+
+.contador-numero{
+
+    display:block;
+
+    font-size:
+        clamp(38px,6vw,65px);
+
+    color:var(--dorado-claro);
+}
+
+.contador-label{
+
+    display:block;
+
+    margin-top:10px;
+
+    font-family:Arial,sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    color:#eadfcf;
+}
+
+
+/* =========================================================
+   EVENTOS
+========================================================= */
+
+.eventos{
+    background:var(--crema);
+}
+
+.eventos-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.evento{
+
+    background:var(--crema-claro);
+
+    border:
+        1px solid
+        rgba(178,139,77,.25);
+
+    padding:40px 25px;
+
+    text-align:center;
+
+    box-shadow:
+        0 5px 25px
+        rgba(50,25,25,.04);
+
+    transition:.4s;
+}
+
+.evento:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--sombra);
+}
+
+.evento-icono{
+
+    font-size:34px;
+
+    color:var(--dorado);
+
+    margin-bottom:20px;
+}
+
+.evento h3{
+
+    color:var(--borgona);
+
+    font-size:25px;
+
+    font-weight:normal;
+
+    margin-bottom:17px;
+}
+
+.evento .hora{
+
+    color:var(--dorado);
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    margin-bottom:18px;
+}
+
+.evento p{
+
+    font-size:15px;
+
+    line-height:1.8;
+}
+
+
+/* =========================================================
+   ITINERARIO
+========================================================= */
+
+.itinerario{
+
+    background:var(--crema-claro);
+}
+
+.timeline{
+
+    max-width:800px;
+
+    margin:auto;
+
+    position:relative;
+}
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:0;
+    bottom:0;
+
+    width:1px;
+
+    background:
+        var(--dorado);
+
+    transform:translateX(-50%);
+}
+
+.timeline-item{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 70px 1fr;
+
+    align-items:center;
+
+    margin-bottom:40px;
+}
+
+.timeline-item:last-child{
+    margin-bottom:0;
+}
+
+.timeline-text{
+
+    padding:15px 30px;
+}
+
+.timeline-item:nth-child(
+    odd
+) .timeline-text:first-child{
+    text-align:right;
+}
+
+.timeline-item:nth-child(
+    even
+) .timeline-text:first-child{
+    visibility:hidden;
+}
+
+.timeline-item:nth-child(
+    odd
+) .timeline-text:last-child{
+    visibility:hidden;
+}
+
+.timeline-item:nth-child(
+    even
+) .timeline-text:last-child{
+    text-align:left;
+}
+
+.timeline-hora{
+
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+
+    background:var(--borgona);
+
+    color:var(--crema);
+
+    border:
+        5px solid
+        var(--crema-claro);
+
+    outline:
+        1px solid
+        var(--dorado);
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    font-family:Arial,sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+}
+
+.timeline-text h3{
+
+    color:var(--borgona);
+
+    font-size:22px;
+
+    font-weight:normal;
+
+    margin-bottom:8px;
+}
+
+.timeline-text p{
+
+    font-family:Arial,sans-serif;
+
+    font-size:12px;
+
+    color:#665652;
+}
+
+
+/* =========================================================
+   PADRES
+========================================================= */
+
+.padres{
+
+    background:var(--crema);
+
+    text-align:center;
+}
+
+.padres-grid{
+
+    max-width:900px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:25px;
+}
+
+.padres-card{
+
+    padding:40px 25px;
+
+    border:
+        1px solid
+        rgba(178,139,77,.3);
+
+    background:var(--crema-claro);
+}
+
+.padres-card h3{
+
+    color:var(--dorado);
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+    font-family:Arial,sans-serif;
+
+    text-transform:uppercase;
+
+    margin-bottom:25px;
+}
+
+.padres-card p{
+
+    color:var(--borgona);
+
+    font-size:19px;
+
+    line-height:1.9;
+}
+
+
+/* =========================================================
+   HISTORIA
+========================================================= */
+
+.historia{
+
+    background:var(--crema-claro);
+}
+
+.historia-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:60px;
+
+    align-items:center;
+}
+
+.foto-principal{
+
+    min-height:520px;
+
+    border:10px solid var(--crema);
+
+    outline:
+        1px solid
+        rgba(178,139,77,.5);
+
+    box-shadow:var(--sombra);
+
+    background:
+        linear-gradient(
+            135deg,
+            #d7c2ac,
+            #8b5661
+        );
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    color:white;
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+}
+
+.historia-texto h2{
+
+    color:var(--borgona);
+
+    font-size:
+        clamp(35px,5vw,55px);
+
+    font-weight:normal;
+
+    margin-bottom:25px;
+}
+
+.historia-texto p{
+
+    font-size:17px;
+
+    line-height:1.9;
+
+    margin-bottom:20px;
+}
+
+.firma{
+
+    color:var(--dorado);
+
+    font-size:26px;
+
+    font-style:italic;
+
+    margin-top:30px;
+}
+
+
+/* =========================================================
+   GALERÍA
+========================================================= */
+
+.galeria{
+
+    background:var(--borgona-oscuro);
+}
+
+.galeria h2{
+    color:var(--crema);
+}
+
+.galeria .eyebrow{
+    color:var(--dorado-claro);
+}
+
+.galeria-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:15px;
+}
+
+.foto{
+
+    height:420px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a47a7c,
+            #eadcca
+        );
+}
+
+.foto:nth-child(2){
+
+    margin-top:45px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c6a98b,
+            #734750
+        );
+}
+
+.foto:nth-child(3){
+
+    background:
+        linear-gradient(
+            135deg,
+            #e6d8c6,
+            #89515d
+        );
+}
+
+.foto-etiqueta{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    padding:25px;
+
+    color:white;
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    background:
+        linear-gradient(
+            transparent 45%,
+            rgba(53,16,25,.75)
+        );
+}
+
+
+/* =========================================================
+   AGRADECIMIENTOS
+========================================================= */
+
+.agradecimientos{
+
+    background:var(--crema);
+
+    text-align:center;
+}
+
+.agradecimientos-nombres{
+
+    max-width:700px;
+
+    margin:auto;
+
+    font-size:19px;
+
+    line-height:2;
+
+    color:var(--borgona);
+}
+
+
+/* =========================================================
+   DRESS CODE
+========================================================= */
+
+.dresscode{
+
+    background:var(--crema-claro);
+
+    text-align:center;
+}
+
+.dress-icon{
+
+    font-size:50px;
+
+    color:var(--dorado);
+
+    margin-bottom:20px;
+}
+
+.dresscode h3{
+
+    color:var(--borgona);
+
+    font-size:32px;
+
+    font-weight:normal;
+
+    margin-bottom:20px;
+}
+
+.dresscode p{
+
+    max-width:650px;
+
+    margin:auto;
+
+    line-height:1.9;
+
+    font-size:16px;
+}
+
+
+/* =========================================================
+   UBICACIÓN
+========================================================= */
+
+.ubicacion{
+
+    background:var(--crema);
+}
+
+.ubicacion-card{
+
+    max-width:850px;
+
+    margin:auto;
+
+    background:var(--crema-claro);
+
+    border:
+        1px solid
+        rgba(178,139,77,.25);
+
+    padding:55px 30px;
+
+    text-align:center;
+
+    box-shadow:var(--sombra);
+}
+
+.ubicacion-card h3{
+
+    color:var(--borgona);
+
+    font-size:31px;
+
+    font-weight:normal;
+
+    margin-bottom:20px;
+}
+
+.ubicacion-card p{
+
+    line-height:1.9;
+
+    margin-bottom:28px;
+}
+
+.boton-secundario{
+
+    display:inline-flex;
+
+    padding:14px 27px;
+
+    border:1px solid var(--borgona);
+
+    color:var(--borgona);
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    transition:.3s;
+}
+
+.boton-secundario:hover{
+
+    background:var(--borgona);
+
+    color:var(--crema);
+}
+
+
+/* =========================================================
+   REGALOS
+========================================================= */
+
+.regalos{
+
+    background:var(--crema-claro);
+
+    text-align:center;
+}
+
+.regalo-icono{
+
+    font-size:45px;
+
+    color:var(--dorado);
+
+    margin-bottom:20px;
+}
+
+.regalos-intro{
+
+    max-width:700px;
+
+    margin:0 auto 35px;
+
+    font-size:17px;
+
+    line-height:1.9;
+}
+
+
+/* =========================================================
+   ACORDEÓN DE REGALOS
+========================================================= */
+
+.lista-regalos{
+
+    max-width:850px;
+
+    margin:auto;
+
+    text-align:left;
+}
+
+.regalo-grupo{
+
+    margin-bottom:10px;
+
+    border:
+        1px solid
+        rgba(178,139,77,.25);
+
+    background:white;
+}
+
+.regalo-grupo summary{
+
+    cursor:pointer;
+
+    list-style:none;
+
+    padding:20px 22px;
+
+    color:var(--borgona);
+
+    font-size:16px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.regalo-grupo summary::-webkit-details-marker{
+    display:none;
+}
+
+.regalo-grupo summary::after{
+
+    content:"+";
+
+    color:var(--dorado);
+
+    font-size:22px;
+}
+
+.regalo-grupo[open] summary::after{
+    content:"−";
+}
+
+.regalo-contenido{
+
+    padding:0 25px 25px;
+
+    color:#51433f;
+
+    line-height:1.9;
+}
+
+.regalo-contenido ol{
+
+    padding-left:22px;
+}
+
+.regalo-contenido li{
+
+    padding:4px 0;
+}
+
+
+/* =========================================================
+   TRANSFERENCIA
+========================================================= */
+
+.transferencia{
+
+    margin-top:45px;
+
+    max-width:850px;
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+    padding:45px 25px;
+
+    border:
+        1px solid
+        rgba(178,139,77,.3);
+
+    background:
+        var(--crema);
+
+    text-align:center;
+}
+
+.transferencia h3{
+
+    color:var(--borgona);
+
+    font-size:30px;
+
+    font-weight:normal;
+
+    margin-bottom:15px;
+}
+
+.transferencia-intro{
+
+    line-height:1.8;
+
+    margin-bottom:30px;
+}
+
+.cuentas{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:15px;
+}
+
+.cuenta{
+
+    background:white;
+
+    padding:25px 18px;
+
+    border:
+        1px solid
+        rgba(178,139,77,.2);
+
+    text-align:left;
+}
+
+.cuenta h4{
+
+    color:var(--dorado);
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    margin-bottom:15px;
+}
+
+.cuenta strong{
+
+    color:var(--borgona);
+
+    font-size:15px;
+
+    display:block;
+
+    margin-bottom:10px;
+}
+
+.cuenta p{
+
+    font-family:Arial,sans-serif;
+
+    font-size:12px;
+
+    line-height:1.8;
+
+    word-break:break-word;
+}
+
+.yape-plin{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:15px;
+
+    max-width:650px;
+
+    margin:20px auto 0;
+}
+
+.digital{
+
+    padding:25px;
+
+    background:white;
+
+    border:
+        1px solid
+        rgba(178,139,77,.2);
+}
+
+.digital h4{
+
+    color:var(--dorado);
+
+    font-family:Arial,sans-serif;
+
+    letter-spacing:3px;
+
+    font-size:12px;
+
+    margin-bottom:10px;
+}
+
+.digital strong{
+
+    color:var(--borgona);
+
+    font-size:22px;
+}
+
+.digital p{
+
+    font-size:13px;
+
+    margin-top:8px;
+}
+
+
+/* =========================================================
+   RSVP
+========================================================= */
+
+.rsvp{
+
+    background:var(--borgona);
+
+    color:var(--crema);
+
+    text-align:center;
+}
+
+.rsvp .eyebrow{
+    color:var(--dorado-claro);
+}
+
+.rsvp h2{
+
+    color:var(--crema);
+
+    font-size:
+        clamp(38px,6vw,60px);
+
+    font-weight:normal;
+
+    margin-bottom:25px;
+}
+
+.rsvp p{
+
+    max-width:650px;
+
+    margin:0 auto 30px;
+
+    line-height:1.9;
+
+    color:#eadfcf;
+}
+
+.boton-whatsapp{
+
+    display:inline-flex;
+
+    background:var(--dorado);
+
+    color:white;
+
+    padding:16px 30px;
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    transition:.3s;
+}
+
+.boton-whatsapp:hover{
+
+    background:var(--dorado-claro);
+
+    transform:translateY(-3px);
+}
+
+
+/* =========================================================
+   FINAL
+========================================================= */
+
+.final{
+
+    min-height:60vh;
+
+    padding:90px 20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            rgba(178,139,77,.12),
+            transparent 42%
+        ),
+
+        var(--crema);
+}
+
+.final-corazon{
+
+    color:var(--dorado);
+
+    font-size:38px;
+
+    margin-bottom:25px;
+}
+
+.final h2{
+
+    max-width:800px;
+
+    margin:auto;
+
+    color:var(--borgona);
+
+    font-size:
+        clamp(38px,6vw,68px);
+
+    font-weight:normal;
+
+    line-height:1.1;
+
+    margin-bottom:25px;
+}
+
+.final p{
+
+    max-width:650px;
+
+    margin:auto;
+
+    font-size:18px;
+
+    line-height:1.9;
+}
+
+.final-nombres{
+
+    margin-top:35px;
+
+    color:var(--dorado);
+
+    font-size:30px;
+
+    font-style:italic;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+    background:var(--borgona-oscuro);
+
+    color:var(--crema);
+
+    text-align:center;
+
+    padding:50px 20px;
+}
+
+.footer-nombres{
+
+    font-size:31px;
+
+    margin-bottom:15px;
+}
+
+footer p{
+
+    font-family:Arial,sans-serif;
+
+    color:var(--dorado-claro);
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   ANIMACIONES SCROLL
+========================================================= */
+
+.revelar{
+
+    opacity:0;
+
+    transform:translateY(35px);
+
+    transition:
+
+        opacity 1s ease,
+
+        transform 1s ease;
+}
+
+.revelar.visible{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:850px){
+
+    .eventos-grid{
+        grid-template-columns:1fr;
+    }
+
+    .historia-grid{
+        grid-template-columns:1fr;
+    }
+
+    .padres-grid{
+        grid-template-columns:1fr;
+    }
+
+    .cuentas{
+        grid-template-columns:1fr;
+    }
+
+    .timeline-item{
+        grid-template-columns:
+            70px 1fr;
+    }
+
+    .timeline::before{
+        left:35px;
+    }
+
+    .timeline-item .timeline-text:first-child{
+        display:none;
+    }
+
+    .timeline-item .timeline-text:last-child{
+        visibility:visible !important;
+
+        text-align:left !important;
+
+        grid-column:2;
+    }
+
+    .timeline-hora{
+        grid-column:1;
+        grid-row:1;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .seccion{
+        padding:75px 18px;
+    }
+
+    .portada::before{
+        inset:14px;
+    }
+
+    .portada-frase{
+        font-size:16px;
+    }
+
+    .contador{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .contador-item:nth-child(2){
+        border-right:none;
+    }
+
+    .contador-item:nth-child(-n+2){
+        border-bottom:
+            1px solid
+            rgba(215,189,134,.25);
+    }
+
+    .galeria-grid{
+        grid-template-columns:1fr;
+    }
+
+    .foto{
+        height:420px;
+    }
+
+    .foto:nth-child(2){
+        margin-top:0;
+    }
+
+    .yape-plin{
+        grid-template-columns:1fr;
+    }
+
+    .navbar-contenido{
+        justify-content:flex-start;
+    }
+
+    .portada h1{
+        font-size:43px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCCION DE MOVIMIENTO
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *{
+        scroll-behavior:auto !important;
+        animation:none !important;
+        transition:none !important;
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-    <section class="portada">
 
-        <div class="contenido">
+<!-- =====================================================
+     LOADER
+===================================================== -->
 
-            <div class="pequeno">
-                NUESTRA BODA
+<div class="loader" id="loader">
+
+    <div class="loader-corazon">
+        ♥
+    </div>
+
+    <div class="loader-texto">
+        Preparando nuestra invitación
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MÚSICA
+     
+     Más adelante colocaremos:
+     audio/musica.mp3
+===================================================== -->
+
+<audio id="musica" loop preload="auto">
+
+    <source
+        src="audio/musica.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+<button
+    class="boton-musica"
+    id="botonMusica"
+    aria-label="Música">
+
+    ♪
+
+</button>
+
+
+<!-- =====================================================
+     PORTADA
+===================================================== -->
+
+<section
+    class="portada"
+    id="inicio">
+
+    <div class="orbita"></div>
+
+    <div class="portada-contenido">
+
+        <div class="portada-superior">
+            Nuestra boda
+        </div>
+
+        <div class="ornamento">
+            ✦ · ✦
+        </div>
+
+        <h1>
+
+            Isaí Marcelo
+            Sánchez López
+
+            <span class="ampersand">
+                &amp;
+            </span>
+
+            Ebony Blondy
+            Simeon Cabanillas
+
+        </h1>
+
+        <div class="ornamento">
+            ✦
+        </div>
+
+        <div class="portada-fecha">
+
+            Domingo · 29 · Noviembre · 2026
+
+        </div>
+
+        <p class="portada-frase">
+
+            Con amor y mucha alegría queremos
+            compartir contigo el inicio de
+            esta nueva historia.
+
+        </p>
+
+        <a
+            href="#bienvenida"
+            class="boton-principal"
+            id="abrirInvitacion">
+
+            Abrir invitación
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     NAVEGACIÓN
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="navbar-contenido">
+
+        <a href="#bienvenida">
+            Inicio
+        </a>
+
+        <a href="#cuenta">
+            Fecha
+        </a>
+
+        <a href="#eventos">
+            Evento
+        </a>
+
+        <a href="#itinerario">
+            Itinerario
+        </a>
+
+        <a href="#galeria">
+            Fotos
+        </a>
+
+        <a href="#ubicacion">
+            Lugar
+        </a>
+
+        <a href="#regalos">
+            Regalos
+        </a>
+
+        <a href="#rsvp">
+            RSVP
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     BIENVENIDA
+===================================================== -->
+
+<section
+    class="seccion bienvenida"
+    id="bienvenida">
+
+    <div class="contenedor revelar">
+
+        <div class="titulo-seccion">
+
+            <div class="eyebrow">
+                Con mucha alegría
             </div>
 
-            <div class="adorno">
-                ✦
+            <h2>
+                ¡Nos casamos!
+            </h2>
+
+            <div class="linea-dorada"></div>
+
+        </div>
+
+        <div class="inicial">
+            ♥
+        </div>
+
+        <p class="texto-centro">
+
+            Después de compartir sueños,
+            momentos y tantos recuerdos,
+            hemos decidido unir nuestras vidas
+            y comenzar juntos una nueva etapa.
+
+            <br><br>
+
+            Queremos celebrar este día tan especial
+            junto a las personas que forman parte
+            de nuestra historia.
+
+        </p>
+
+        <p class="cita">
+
+            “Que nuestro amor sea siempre
+            el comienzo de una nueva aventura.”
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CUENTA REGRESIVA
+===================================================== -->
+
+<section
+    class="seccion countdown"
+    id="cuenta">
+
+    <div class="contenedor revelar">
+
+        <div class="titulo-seccion">
+
+            <div class="eyebrow">
+                Cada vez falta menos
             </div>
 
-            <h1>
-                Isaí Marcelo Sánchez López
-                <span class="ampersand">&amp;</span>
-                Ebony Blondy Simeon Cabanillas
-            </h1>
+            <h2>
+                Cuenta regresiva
+            </h2>
 
-            <div class="linea"></div>
+            <div class="linea-dorada"></div>
 
-            <div class="fecha">
-                17 · 11 · 2026
+        </div>
+
+        <div class="contador">
+
+            <div class="contador-item">
+
+                <span
+                    class="contador-numero"
+                    id="dias">
+                    00
+                </span>
+
+                <span class="contador-label">
+                    Días
+                </span>
+
             </div>
 
-            <p class="mensaje">
-              «De la amistad nació un amor que nos enseñó a elegirnos cada día;
-              y hoy, con Dios como guía, elegimos amarnos
-              y caminar juntos para toda la vida.»
+
+            <div class="contador-item">
+
+                <span
+                    class="contador-numero"
+                    id="horas">
+                    00
+                </span>
+
+                <span class="contador-label">
+                    Horas
+                </span>
+
+            </div>
+
+
+            <div class="contador-item">
+
+                <span
+                    class="contador-numero"
+                    id="minutos">
+                    00
+                </span>
+
+                <span class="contador-label">
+                    Minutos
+                </span>
+
+            </div>
+
+
+            <div class="contador-item">
+
+                <span
+                    class="contador-numero"
+                    id="segundos">
+                    00
+                </span>
+
+                <span class="contador-label">
+                    Segundos
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     EVENTOS
+===================================================== -->
+
+<section
+    class="seccion eventos"
+    id="eventos">
+
+    <div class="contenedor">
+
+        <div class="titulo-seccion revelar">
+
+            <div class="eyebrow">
+                Domingo 29 de noviembre
+            </div>
+
+            <h2>
+                Nuestro gran día
+            </h2>
+
+            <div class="linea-dorada"></div>
+
+        </div>
+
+
+        <div class="eventos-grid">
+
+
+            <article class="evento revelar">
+
+                <div class="evento-icono">
+                    ♡
+                </div>
+
+                <h3>
+                    Ceremonia civil
+                </h3>
+
+                <div class="hora">
+                    15:30 horas
+                </div>
+
+                <p>
+
+                    Av. El Muro Mz. K2 Lote 9 S/N
+
+                    <br><br>
+
+                    Ref. cruce Av. Central
+                    y Av. El Muro
+
+                </p>
+
+            </article>
+
+
+            <article class="evento revelar">
+
+                <div class="evento-icono">
+                    ✦
+                </div>
+
+                <h3>
+                    Recepción
+                </h3>
+
+                <div class="hora">
+                    17:00 horas
+                </div>
+
+                <p>
+
+                    Después de la ceremonia
+                    compartiremos juntos
+                    este momento especial.
+
+                </p>
+
+            </article>
+
+
+            <article class="evento revelar">
+
+                <div class="evento-icono">
+                    ♫
+                </div>
+
+                <h3>
+                    Cena
+                </h3>
+
+                <div class="hora">
+                    19:00 horas
+                </div>
+
+                <p>
+
+                    Una noche para celebrar,
+                    compartir y crear
+                    nuevos recuerdos.
+
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ITINERARIO
+===================================================== -->
+
+<section
+    class="seccion itinerario"
+    id="itinerario">
+
+    <div class="contenedor">
+
+        <div class="titulo-seccion revelar">
+
+            <div class="eyebrow">
+                Acompáñanos
+            </div>
+
+            <h2>
+                Itinerario
+            </h2>
+
+            <div class="linea-dorada"></div>
+
+        </div>
+
+
+        <div class="timeline">
+
+
+            <div class="timeline-item revelar">
+
+                <div class="timeline-text"></div>
+
+                <div class="timeline-hora">
+                    15:30
+                </div>
+
+                <div class="timeline-text">
+
+                    <h3>
+                        Ceremonia civil
+                    </h3>
+
+                    <p>
+                        El inicio de nuestro gran día.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item revelar">
+
+                <div class="timeline-text">
+
+                    <h3>
+                        Bendición matrimonial
+                    </h3>
+
+                    <p>
+                        Un momento especial
+                        para recibir la bendición
+                        de nuestra unión.
+                    </p>
+
+                </div>
+
+                <div class="timeline-hora">
+                    ✦
+                </div>
+
+                <div class="timeline-text"></div>
+
+            </div>
+
+
+            <div class="timeline-item revelar">
+
+                <div class="timeline-text"></div>
+
+                <div class="timeline-hora">
+                    17:00
+                </div>
+
+                <div class="timeline-text">
+
+                    <h3>
+                        Recepción
+                    </h3>
+
+                    <p>
+                        Comienza la celebración.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item revelar">
+
+                <div class="timeline-text">
+
+                    <h3>
+                        Cena
+                    </h3>
+
+                    <p>
+                        Compartiremos una cena
+                        para celebrar nuestra unión.
+                    </p>
+
+                </div>
+
+                <div class="timeline-hora">
+                    19:00
+                </div>
+
+                <div class="timeline-text"></div>
+
+            </div>
+
+
+            <div class="timeline-item revelar">
+
+                <div class="timeline-text"></div>
+
+                <div class="timeline-hora">
+                    20:00
+                </div>
+
+                <div class="timeline-text">
+
+                    <h3>
+                        Tradicional Palpa
+                    </h3>
+
+                    <p>
+                        Entrega de regalos
+                        y celebración tradicional.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PADRES
+===================================================== -->
+
+<section
+    class="seccion padres"
+    id="padres">
+
+    <div class="contenedor">
+
+        <div class="titulo-seccion revelar">
+
+            <div class="eyebrow">
+                Con gratitud
+            </div>
+
+            <h2>
+                Nuestros padres
+            </h2>
+
+            <div class="linea-dorada"></div>
+
+        </div>
+
+
+        <div class="padres-grid">
+
+
+            <div class="padres-card revelar">
+
+                <h3>
+                    Padres de la novia
+                </h3>
+
+                <p>
+
+                    Maribel Cabanillas Bardales
+
+                    <br>
+
+                    Roberto Joel Simeon Curi
+
+                </p>
+
+            </div>
+
+
+            <div class="padres-card revelar">
+
+                <h3>
+                    Padres del novio
+                </h3>
+
+                <p>
+
+                    Anne Liz López Zacarias
+
+                    <br>
+
+                    Marcelo Sánchez Sánchez
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     HISTORIA
+===================================================== -->
+
+<section
+    class="seccion historia"
+    id="historia">
+
+    <div class="contenedor historia-grid">
+
+
+        <div
+            class="foto-principal revelar">
+
+            Aquí irá nuestra
+            fotografía principal
+
+        </div>
+
+
+        <div
+            class="historia-texto revelar">
+
+            <div class="eyebrow">
+                Nuestra historia
+            </div>
+
+            <h2>
+                Dos caminos,
+                un solo destino.
+            </h2>
+
+            <p>
+
+                Hoy celebramos el amor que nos une
+                y la decisión de caminar juntos
+                hacia una nueva etapa de nuestras vidas.
+
             </p>
 
-            <a href="#invitacion" class="boton">
-                ABRIR INVITACIÓN
+            <p>
+
+                Queremos que este día sea también
+                un recuerdo especial para quienes
+                han acompañado nuestra historia.
+
+            </p>
+
+            <div class="firma">
+                Isaí & Ebony ♥
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GALERÍA
+===================================================== -->
+
+<section
+    class="seccion galeria"
+    id="galeria">
+
+    <div class="contenedor">
+
+        <div class="titulo-seccion revelar">
+
+            <div class="eyebrow">
+                Nuestros recuerdos
+            </div>
+
+            <h2>
+                Momentos
+            </h2>
+
+            <div class="linea-dorada"></div>
+
+        </div>
+
+
+        <div class="galeria-grid">
+
+
+            <div class="foto revelar">
+
+                <div class="foto-etiqueta">
+                    Nuestra historia
+                </div>
+
+            </div>
+
+
+            <div class="foto revelar">
+
+                <div class="foto-etiqueta">
+                    Momentos especiales
+                </div>
+
+            </div>
+
+
+            <div class="foto revelar">
+
+                <div class="foto-etiqueta">
+                    Juntos
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     AGRADECIMIENTOS
+===================================================== -->
+
+<section
+    class="seccion agradecimientos">
+
+    <div class="contenedor revelar">
+
+        <div class="titulo-seccion">
+
+            <div class="eyebrow">
+                Con especial cariño
+            </div>
+
+            <h2>
+                Agradecimientos
+            </h2>
+
+            <div class="linea-dorada"></div>
+
+        </div>
+
+
+        <div class="agradecimientos-nombres">
+
+            Angelo Valdez Cervantes
+
+            <br>
+
+            Peter Molina
+
+            <br>
+
+            Karla Berrocal
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     DRESS CODE
+===================================================== -->
+
+<section
+    class="seccion dresscode">
+
+    <div class="contenedor revelar">
+
+        <div class="dress-icon">
+            ✧
+        </div>
+
+        <div class="eyebrow">
+            Código de vestimenta
+        </div>
+
+        <h3>
+            Elegante
+        </h3>
+
+        <p>
+
+            Queremos que nos acompañes
+            en este día tan especial
+            luciendo tu mejor versión.
+
+            <br><br>
+
+            <strong>
+                Dress Code: ELEGANTE
+            </strong>
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     UBICACIÓN
+========================================================= -->
+
+<section
+    class="seccion ubicacion"
+    id="ubicacion">
+
+    <div class="contenedor">
+
+        <div class="titulo-seccion revelar">
+
+            <div class="eyebrow">
+                Te esperamos
+            </div>
+
+            <h2>
+                ¿Cómo llegar?
+            </h2>
+
+            <div class="linea-dorada"></div>
+
+        </div>
+
+
+        <div class="ubicacion-card revelar">
+
+            <h3>
+                Av. El Muro
+            </h3>
+
+            <p>
+
+                Av. El Muro Mz. K2 Lote 9 S/N
+
+                <br>
+
+                Ref. cruce Av. Central
+                y Av. El Muro
+
+                <br><br>
+
+                Domingo 29 de noviembre de 2026
+
+                <br>
+
+                15:00 horas
+
+            </p>
+
+
+            <!--
+            ESTE ENLACE LO CAMBIAREMOS
+            CUANDO TENGAMOS EL PIN EXACTO
+            DE GOOGLE MAPS.
+            -->
+
+            <a
+                href="https://www.google.com/maps/search/?api=1&query=Av.%20El%20Muro%20Mz.%20K2%20Lote%209%20S%2FN%20Av.%20Central%20El%20Muro"
+                target="_blank"
+                class="boton-secundario">
+
+                Ver ubicación en Maps
+
             </a>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MESA DE REGALOS
+===================================================== -->
+
+<section
+    class="seccion regalos"
+    id="regalos">
+
+    <div class="contenedor">
+
+
+        <div class="titulo-seccion revelar">
+
+            <div class="regalo-icono">
+                ♡
+            </div>
+
+            <div class="eyebrow">
+                Para nuestro nuevo hogar
+            </div>
+
+            <h2>
+                Mesa de regalos
+            </h2>
+
+            <div class="linea-dorada"></div>
+
+        </div>
+
+
+        <p class="regalos-intro revelar">
+
+            Lo más importante para nosotros
+            es contar con tu presencia.
+
+            <br><br>
+
+            Si deseas acompañarnos con un detalle,
+            compartimos algunas ideas que serán
+            muy especiales para nuestro nuevo hogar.
+
+        </p>
+
+
+        <!-- =================================================
+             LISTA DE REGALOS
+        ================================================= -->
+
+        <div class="lista-regalos revelar">
+
+            <details class="regalo-grupo" open>
+
+                <summary>
+                    Lista de regalos
+                </summary>
+
+                <div class="regalo-contenido">
+
+                    <ol>
+
+                        <li>
+                            Juego de cubiertos 24 o 48 piezas
+                        </li>
+
+                        <li>
+                            Juego de vasos y jarra
+                        </li>
+
+                        <li>
+                            Tetera de acero inoxidable
+                        </li>
+
+                        <li>
+                            Hervidora eléctrica
+                        </li>
+
+                        <li>
+                            Juego de copas
+                        </li>
+
+                        <li>
+                            Colchón Paraíso - Royal Queen
+                        </li>
+
+                        <li>
+                            Tarima Queen
+                        </li>
+
+                        <li>
+                            Plancha Oster
+                        </li>
+
+                        <li>
+                            Exprimidor de cítricos
+                        </li>
+
+                        <li>
+                            Vajilla completa
+                        </li>
+
+                        <li>
+                            Cafetera
+                        </li>
+
+                        <li>
+                            Freidora de aire
+                        </li>
+
+                        <li>
+                            TV QLED Samsung
+                        </li>
+
+                        <li>
+                            Juego de sillones para departamento
+                        </li>
+
+                        <li>
+                            Juego comedor 6 personas
+                            para departamento
+                        </li>
+
+                        <li>
+                            Batidora
+                        </li>
+
+                        <li>
+                            Utensilios de cocina
+                        </li>
+
+                        <li>
+                            Set de cuchillos Tramontina
+                        </li>
+
+                        <li>
+                            Licuadora Oster
+                        </li>
+
+                        <li>
+                            Olla arrocera Oster
+                        </li>
+
+                        <li>
+                            Juego de ollas antiadherente
+                        </li>
+
+                        <li>
+                            Set de sartenes antiadherentes
+                        </li>
+
+                        <li>
+                            Extractora Oster
+                        </li>
+
+                        <li>
+                            Campana de cocina (4 hornillas)
+                        </li>
+
+                        <li>
+                            Microondas Samsung
+                        </li>
+
+                        <li>
+                            Refrigeradora Samsung
+                        </li>
+
+                        <li>
+                            Wafflera
+                        </li>
+
+                        <li>
+                            Sandwichera Oster
+                        </li>
+
+                        <li>
+                            Parrilla eléctrica
+                        </li>
+
+                        <li>
+                            Juego de sábanas Queen
+                        </li>
+
+                        <li>
+                            Edredón Queen
+                        </li>
+
+                    </ol>
+
+                </div>
+
+            </details>
+
+        </div>
+
+
+        <!-- =================================================
+             TRANSFERENCIAS
+        ================================================= -->
+
+        <div class="transferencia revelar">
+
+            <h3>
+                Transferencia bancaria
+            </h3>
+
+            <p class="transferencia-intro">
+
+                Si deseas realizar tu regalo mediante
+                transferencia, puedes utilizar cualquiera
+                de las siguientes cuentas.
+
+            </p>
+
+
+            <div class="cuentas">
+
+
+                <!-- BCP -->
+
+                <div class="cuenta">
+
+                    <h4>
+                        BCP
+                    </h4>
+
+                    <strong>
+                        Ebony Blondy Simeon Cabanillas
+                    </strong>
+
+                    <p>
+
+                        Cuenta:
+
+                        <br>
+
+                        19197381426075
+
+                        <br><br>
+
+                        CCI:
+
+                        <br>
+
+                        00219119738142607555
+
+                    </p>
+
+                </div>
+
+
+                <!-- SCOTIABANK -->
+
+                <div class="cuenta">
+
+                    <h4>
+                        Scotiabank
+                    </h4>
+
+                    <strong>
+                        Isaí Marcelo Sánchez López
+                    </strong>
+
+                    <p>
+
+                        Cuenta:
+
+                        <br>
+
+                        0417725942
+
+                        <br><br>
+
+                        CCI:
+
+                        <br>
+
+                        0901120041772594281
+
+                    </p>
+
+                </div>
+
+
+                <!-- BANCO DE LA NACIÓN -->
+
+                <div class="cuenta">
+
+                    <h4>
+                        Banco de la Nación
+                    </h4>
+
+                    <strong>
+                        Isaí Marcelo Sánchez López
+                    </strong>
+
+                    <p>
+
+                        Cuenta:
+
+                        <br>
+
+                        04-066-799641
+
+                        <br><br>
+
+                        CCI:
+
+                        <br>
+
+                        018-000-004066799641-03
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 YAPE / PLIN
+            ================================================= -->
+
+            <div class="yape-plin">
+
+
+                <div class="digital">
+
+                    <h4>
+                        YAPE
+                    </h4>
+
+                    <strong>
+                        922 204 239
+                    </strong>
+
+                    <p>
+                        Ebony Blondy Simeon Cabanillas
+                    </p>
+
+                </div>
+
+
+                <div class="digital">
+
+                    <h4>
+                        PLIN
+                    </h4>
+
+                    <strong>
+                        987 110 949
+                    </strong>
+
+                    <p>
+                        Isaí Marcelo Sánchez López
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     RSVP
+===================================================== -->
+
+<section
+    class="seccion rsvp"
+    id="rsvp">
+
+    <div class="contenedor revelar">
+
+        <div class="eyebrow">
+            Queremos contar contigo
+        </div>
+
+        <h2>
+            ¿Nos acompañas?
+        </h2>
+
+        <p>
+
+            Será una alegría enorme compartir
+            este momento contigo.
+
+            <br><br>
+
+            Confirma tu asistencia por WhatsApp.
+
+        </p>
+
+
+        <!--
+        CAMBIAREMOS ESTE NÚMERO POR EL
+        WHATSAPP QUE UTILIZARÁN PARA RSVP.
+        -->
+
+        <a
+            href="https://wa.me/51922204239?text=Hola%2C%20quiero%20confirmar%20mi%20asistencia%20a%20la%20boda%20de%20Isa%C3%AD%20y%20Ebony."
+            target="_blank"
+            class="boton-whatsapp">
+
+            Confirmar asistencia
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MENSAJE FINAL
+===================================================== -->
+
+<section class="final">
+
+    <div class="final-contenido revelar">
+
+        <div class="final-corazon">
+            ♥
+        </div>
+
+        <h2>
+
+            Gracias por ser parte
+            de nuestra historia.
+
+        </h2>
+
+        <p>
+
+            Esperamos compartir contigo
+            uno de los días más importantes
+            de nuestras vidas.
+
+        </p>
+
+        <div class="final-nombres">
+
+            Isaí & Ebony
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-nombres">
+
+        Isaí & Ebony
+
+    </div>
+
+    <p>
+
+        Nuestra boda · 29 · 11 · 2026
+
+    </p>
+
+</footer>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        setTimeout(
+            function(){
+
+                document
+                    .getElementById("loader")
+                    .classList
+                    .add("oculto");
+
+            },
+            700
+        );
+
+    }
+);
+
+
+/* =========================================================
+   CUENTA REGRESIVA
+
+   Domingo 29 noviembre 2026
+   15:00 horas
+   Perú UTC-5
+========================================================= */
+
+const fechaBoda =
+    new Date(
+        "2026-11-29T15:00:00-05:00"
+    ).getTime();
+
+
+function actualizarCuenta(){
+
+    const ahora =
+        new Date().getTime();
+
+    const diferencia =
+        fechaBoda - ahora;
+
+
+    if(diferencia <= 0){
+
+        document.getElementById("dias")
+            .textContent="00";
+
+        document.getElementById("horas")
+            .textContent="00";
+
+        document.getElementById("minutos")
+            .textContent="00";
+
+        document.getElementById("segundos")
+            .textContent="00";
+
+        return;
+    }
+
+
+    const dias =
+        Math.floor(
+            diferencia /
+            (1000*60*60*24)
+        );
+
+
+    const horas =
+        Math.floor(
+            (
+                diferencia /
+                (1000*60*60)
+            ) % 24
+        );
+
+
+    const minutos =
+        Math.floor(
+            (
+                diferencia /
+                (1000*60)
+            ) % 60
+        );
+
+
+    const segundos =
+        Math.floor(
+            (
+                diferencia /
+                1000
+            ) % 60
+        );
+
+
+    document.getElementById("dias")
+        .textContent =
+        String(dias)
+        .padStart(2,"0");
+
+
+    document.getElementById("horas")
+        .textContent =
+        String(horas)
+        .padStart(2,"0");
+
+
+    document.getElementById("minutos")
+        .textContent =
+        String(minutos)
+        .padStart(2,"0");
+
+
+    document.getElementById("segundos")
+        .textContent =
+        String(segundos)
+        .padStart(2,"0");
+
+}
+
+
+actualizarCuenta();
+
+setInterval(
+    actualizarCuenta,
+    1000
+);
+
+
+/* =========================================================
+   ANIMACIONES SCROLL
+========================================================= */
+
+const elementos =
+    document.querySelectorAll(
+        ".revelar"
+    );
+
+
+const observador =
+    new IntersectionObserver(
+
+        function(entradas){
+
+            entradas.forEach(
+                function(entrada){
+
+                    if(
+                        entrada.isIntersecting
+                    ){
+
+                        entrada.target
+                            .classList
+                            .add("visible");
+
+                        observador.unobserve(
+                            entrada.target
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+
+        {
+            threshold:.12
+        }
+
+    );
+
+
+elementos.forEach(
+    function(elemento){
+
+        observador.observe(
+            elemento
+        );
+
+    }
+);
+
+
+/* =========================================================
+   MÚSICA
+========================================================= */
+
+const musica =
+    document.getElementById(
+        "musica"
+    );
+
+const botonMusica =
+    document.getElementById(
+        "botonMusica"
+    );
+
+let musicaActiva=false;
+
+
+botonMusica.addEventListener(
+    "click",
+    function(){
+
+        if(!musicaActiva){
+
+            musica.play()
+                .then(
+                    function(){
+
+                        musicaActiva=true;
+
+                        botonMusica
+                            .classList
+                            .add("activo");
+
+                        botonMusica
+                            .textContent="❚❚";
+
+                    }
+                )
+                .catch(
+                    function(){
+
+                        alert(
+                            "Primero debemos agregar la música a la carpeta audio."
+                        );
+
+                    }
+                );
+
+        }
+
+        else{
+
+            musica.pause();
+
+            musicaActiva=false;
+
+            botonMusica
+                .classList
+                .remove("activo");
+
+            botonMusica
+                .textContent="♪";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   BOTÓN ABRIR INVITACIÓN
+========================================================= */
+
+document
+    .getElementById(
+        "abrirInvitacion"
+    )
+    .addEventListener(
+        "click",
+        function(){
+
+            if(!musicaActiva){
+
+                musica.play()
+                    .then(
+                        function(){
+
+                            musicaActiva=true;
+
+                            botonMusica
+                                .classList
+                                .add("activo");
+
+                            botonMusica
+                                .textContent="❚❚";
+
+                        }
+                    )
+                    .catch(
+                        function(){
+
+                            /*
+
+                            Algunos navegadores
+                            bloquean el audio
+                            automáticamente.
+
+                            La invitación
+                            continuará funcionando.
+
+                            */
+
+                        }
+                    );
+
+            }
+
+        }
+    );
+
+
+</script>
+
 
 </body>
 </html>
