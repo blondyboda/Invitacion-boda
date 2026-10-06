@@ -2227,7 +2227,184 @@ footer p{
         justify-content:flex-start;
     }
 }
+/* =====================================================
+   CORRECCIÓN FINAL - ITINERARIO
+   ===================================================== */
 
+.timeline {
+  position: relative;
+  width: 100%;
+  max-width: 950px;
+  margin: 55px auto 0;
+  padding: 20px 0;
+}
+
+/* Línea central */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--dorado);
+  transform: translateX(-50%);
+}
+
+/* Cada evento */
+.timeline .timeline-item {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: 1fr 90px 1fr;
+  align-items: center;
+  width: 100%;
+  min-height: 170px;
+  margin: 0;
+  
+  /* Evita que la animación o el reveal los oculte */
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+/* Círculo central */
+.timeline .timeline-dot {
+  grid-column: 2;
+  grid-row: 1;
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+
+  width: 68px;
+  height: 68px;
+  margin: auto;
+
+  border-radius: 50%;
+  background: var(--borgona);
+  border: 1px solid var(--dorado);
+
+  box-shadow:
+    0 0 0 6px var(--crema),
+    0 0 0 7px var(--dorado);
+
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  color: #fff;
+  font-size: 17px;
+  z-index: 5;
+}
+
+/* Contenido */
+.timeline .timeline-content {
+  position: relative;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 15px 35px;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+/* Eventos impares: texto a la izquierda */
+.timeline .timeline-item:nth-child(odd) .timeline-content {
+  grid-column: 1;
+  grid-row: 1;
+  text-align: right;
+}
+
+/* Eventos pares: texto a la derecha */
+.timeline .timeline-item:nth-child(even) .timeline-content {
+  grid-column: 3;
+  grid-row: 1;
+  text-align: left;
+}
+
+/* Hora */
+.timeline .timeline-time {
+  display: block;
+  margin-bottom: 8px;
+
+  font-family: Georgia, serif;
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--dorado);
+}
+
+/* Título */
+.timeline .timeline-content h3 {
+  margin: 0 0 7px;
+
+  font-family: Georgia, serif;
+  font-size: 25px;
+  font-weight: 500;
+
+  color: var(--borgona);
+}
+
+/* Descripción */
+.timeline .timeline-content p {
+  margin: 0;
+
+  font-family: Georgia, serif;
+  font-size: 14px;
+  line-height: 1.6;
+
+  color: #6b5b5b;
+}
+
+/* =====================================================
+   MÓVIL
+   ===================================================== */
+
+@media (max-width: 700px) {
+
+  .timeline {
+    margin-top: 45px;
+    padding: 10px 0;
+  }
+
+  .timeline::before {
+    left: 35px;
+    transform: none;
+  }
+
+  .timeline .timeline-item {
+    display: grid !important;
+    grid-template-columns: 70px 1fr;
+    min-height: 145px;
+  }
+
+  .timeline .timeline-dot {
+    grid-column: 1;
+    grid-row: 1;
+    width: 60px;
+    height: 60px;
+  }
+
+  .timeline .timeline-content,
+  .timeline .timeline-item:nth-child(odd) .timeline-content,
+  .timeline .timeline-item:nth-child(even) .timeline-content {
+    grid-column: 2;
+    grid-row: 1;
+
+    margin: 0 !important;
+    padding: 12px 15px;
+
+    text-align: left;
+  }
+
+  .timeline .timeline-content h3 {
+    font-size: 21px;
+  }
+
+  .timeline .timeline-content p {
+    font-size: 13px;
+  }
+}
 </style>
 
 </head>
